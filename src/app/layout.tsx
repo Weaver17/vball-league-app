@@ -39,12 +39,7 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    <SidebarProvider>
-                        <AppSidebar />
-                        <SidebarTrigger />
-
-                        {children}
-                    </SidebarProvider>
+                    {children}
                 </ThemeProvider>
             </body>
         </html>

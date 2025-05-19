@@ -1,4 +1,7 @@
-import { ThemeBtn } from "@/components/buttons/theme-btn";
+import Background from "@/components/app/background";
+import Header from "@/components/app/header/header";
+import AppSidebar from "@/components/app/sidebar/app-sidebar";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import React from "react";
 
 function ClientLayout({
@@ -7,10 +10,14 @@ function ClientLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <main className="main relative w-full">
-            <ThemeBtn />
-            {children}
-        </main>
+        <SidebarProvider>
+            <AppSidebar />
+            <main className="main relative w-full">
+                <Header />
+                {children}
+                <Background />
+            </main>
+        </SidebarProvider>
     );
 }
 

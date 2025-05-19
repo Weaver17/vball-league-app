@@ -14,7 +14,7 @@ export function ThemeBtn() {
             variant="outline"
             size="icon"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="cursor-pointer absolute top-4 right-4 z-50"
+            className="cursor-pointer"
         >
             {theme === "dark" ? (
                 <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />

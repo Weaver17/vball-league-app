@@ -16,8 +16,8 @@ import React from "react";
 function AppSidebar() {
     return (
         <Sidebar>
-            <SidebarHeader className=" font-bold text-xl border-b border-border py-8">
-                Vball League App
+            <SidebarHeader className=" font-bold text-xl border-b border-primary py-8">
+                <Link href="/">Vball League App</Link>
             </SidebarHeader>
             <SidebarGroupContent>
                 <SidebarMenu className="gap-2">
