@@ -1,5 +1,4 @@
-import MySidebar from "@/components/app/sidebar/mySidebar";
-import { ThemeBtn } from "@/components/buttons/themeBtn";
+import { ThemeBtn } from "@/components/buttons/theme-btn";
 import React from "react";
 
 function ClientLayout({
@@ -8,9 +7,8 @@ function ClientLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <main className="main relative">
+        <main className="main relative w-full">
             <ThemeBtn />
-            <MySidebar />
             {children}
         </main>
     );

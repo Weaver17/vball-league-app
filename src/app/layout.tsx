@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
-import { Geist as fontSans, Geist_Mono as fontMono } from "next/font/google";
+import {
+    Red_Hat_Text as fontSans,
+    Red_Hat_Mono as fontMono,
+} from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import AppSidebar from "@/components/app/sidebar/app-sidebar";
 
 const sansFont = fontSans({
     variable: "--font-font-sans",
@@ -26,7 +31,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${sansFont.variable} ${monoFont.variable} antialiased`}
+                className={`${sansFont.variable} ${monoFont.variable} antialiased font-sans`}
             >
                 <ThemeProvider
                     attribute="class"
@@ -34,7 +39,12 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    {children}
+                    <SidebarProvider>
+                        <AppSidebar />
+                        <SidebarTrigger />
+
+                        {children}
+                    </SidebarProvider>
                 </ThemeProvider>
             </body>
         </html>

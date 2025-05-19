@@ -23,10 +23,10 @@
     height: 100vh;
     position: fixed;
     top: 0;
-    left: 0;
+    right: 0;
     margin: 0;
-    padding: 4rem 0.5rem 0.2rem 2rem;
-    border-right: 1px solid var(--border);
+    padding: 4rem 2rem 0.2rem 0.5rem;
+    border-left: 1px solid var(--border);
 }
 
 .container {
