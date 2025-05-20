@@ -12,28 +12,50 @@ datasource db {
 }
 
 model Player {
-  id             String @id @default(cuid())
-  firstName      String
-  lastName       String
-  email          String @unique
-  password       String
-  mainPosition   String
-  secondPosition String
-  height         String
-  level          String
-  teams          Team[]
+  id                 String   @id @default(cuid())
+  firstName          String
+  lastName           String
+  email              String   @unique
+  password           String
+  mainPosition       String
+  secondPosition     String
+  height             String
+  level              String
+  gender             String
+  preferredCourtType String
+  teams              Team[]   @relation("PlayerTeams")
+  commissionerOf     League[]
+  captainOf          Team[]   @relation("PlayerCaptainOf")
+  captainId          String   @unique @default(cuid())
 }
 
 model Team {
-  id       String   @id @default(cuid())
-  name     String
-  league   League   @relation(fields: [leagueId], references: [id])
-  leagueId String
-  players  Player[]
+  id            String   @id @default(cuid())
+  name          String
+  level         String
+  openPositions Int
+  playerType    String
+  courtType     String
+  teamCaptain   Player   @relation("PlayerCaptainOf", fields: [teamCaptainId], references: [captainId])
+  teamCaptainId String
+  league        League   @relation(fields: [leagueId], references: [id])
+  leagueId      String
+  players       Player[] @relation("PlayerTeams")
 }
 
 model League {
-  id    String @id @default(cuid())
-  name  String
-  teams Team[]
+  id             String   @id @default(cuid())
+  name           String   @unique
+  slug           String   @unique
+  level          String
+  playerType     String
+  courtType      String
+  status         String
+  starts         DateTime
+  ends           DateTime
+  day            String
+  teamSlots      Int
+  commissioner   Player   @relation(fields: [commissionerId], references: [id])
+  commissionerId String
+  teams          Team[]
 }

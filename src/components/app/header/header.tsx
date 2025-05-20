@@ -17,8 +17,12 @@ async function Header() {
                 <HeaderTitle />
             </div>
             <div className="flex gap-4">
-                <HeaderBtn text="Sign In" href="/signin" bgColor="bg-primary" />
-                <HeaderBtn text="Sign Up" href="/signup" bgColor="bg-muted" />
+                <HeaderBtn
+                    text="Sign In"
+                    href="/sign-in"
+                    bgColor="bg-primary"
+                />
+                <HeaderBtn text="Sign Up" href="/sign-up" bgColor="bg-muted" />
                 <ThemeBtn />
             </div>
         </header>

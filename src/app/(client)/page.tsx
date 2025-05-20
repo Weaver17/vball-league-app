@@ -20,7 +20,6 @@ function Home() {
                 </h4>
             </div>
             <div className="container">
-                <h4 className="underline font-semibold">Current Leagues</h4>
                 <CurrentLeaguesTable />
             </div>
         </div>
