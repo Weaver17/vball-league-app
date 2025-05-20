@@ -3,7 +3,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+body {
+    background-image: url("../../public/bg.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .main {
+    margin: 0 auto;
+    padding: 0 0 0 16rem;
+    min-height: 100vh;
+}
+
+.main-auth {
     margin: 0 auto;
     padding: 0;
     min-height: 100vh;
@@ -116,7 +128,7 @@ span {
     --popover-foreground: oklch(0.147 0.004 49.25);
     --primary: oklch(0.5164 0.2492 298.64); /* #8027df */
     --primary-foreground: oklch(0.985 0.001 106.423);
-    --secondary: oklch(0.97 0.001 106.424);
+    --secondary: oklch(0.7326 0.1375 62.42); /* #e59341 */
     --secondary-foreground: oklch(0.216 0.006 56.043);
     --muted: oklch(0.7035 0.1802 298.64); /* #b082ff */
     --muted-foreground: oklch(0.7035 0.1802 298.64 / 70%); /* #9a4cff */
@@ -132,13 +144,13 @@ span {
     --chart-3: oklch(0.398 0.07 227.392);
     --chart-4: oklch(0.828 0.189 84.429);
     --chart-5: oklch(0.769 0.188 70.08);
-    --sidebar: oklch(0.985 0.001 106.423);
+    --sidebar: oklch(0.9896 0.001 106.423); /* #fcfcfb */
     --sidebar-foreground: oklch(0.147 0.004 49.25);
     --sidebar-primary: oklch(0.216 0.006 56.043);
     --sidebar-primary-foreground: oklch(0.985 0.001 106.423);
     --sidebar-accent: oklch(0.97 0.001 106.424);
     --sidebar-accent-foreground: oklch(0.216 0.006 56.043);
-    --sidebar-border: oklch(0.5164 0.2492 298.64);
+    --sidebar-border: oklch(0.9551 0 0);
     --sidebar-ring: oklch(0.709 0.01 56.259);
 }
 
@@ -151,7 +163,7 @@ span {
     --popover-foreground: oklch(0.985 0.001 106.423);
     --primary: oklch(0.5164 0.2492 298.64); /* #8027df */
     --primary-foreground: oklch(0.216 0.006 56.043);
-    --secondary: oklch(0.268 0.007 34.298);
+    --secondary: oklch(0.7326 0.1375 62.42); /* #e59341 */
     --secondary-foreground: oklch(0.985 0.001 106.423);
     --muted: oklch(0.6387 0.1153 298.64); /* ##957bc8 */
     --muted-foreground: oklch(0.7478 0.2492 298.64); /* # */
@@ -172,8 +184,12 @@ span {
     --sidebar-primary-foreground: oklch(0.985 0.001 106.423);
     --sidebar-accent: oklch(0.268 0.007 34.298);
     --sidebar-accent-foreground: oklch(0.985 0.001 106.423);
-    --sidebar-border: oklch(0.5164 0.2492 298.64);
+    --sidebar-border: oklch(0.3257 0 0); /* #343434 */
     --sidebar-ring: oklch(0.553 0.013 58.071);
+
+    body {
+        background-image: url("../../public/bg-dark.svg");
+    }
 
     .container {
         background-color: oklch(0.147 0.004 49.25 / 40%);

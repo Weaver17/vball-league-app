@@ -5,8 +5,6 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import AppSidebar from "@/components/app/sidebar/app-sidebar";
 
 const sansFont = fontSans({
     variable: "--font-font-sans",
@@ -31,7 +29,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${sansFont.variable} ${monoFont.variable} antialiased font-sans`}
+                className={`${sansFont.variable} ${monoFont.variable} antialiased font-sans max-w-[1480px] mx-auto `}
             >
                 <ThemeProvider
                     attribute="class"

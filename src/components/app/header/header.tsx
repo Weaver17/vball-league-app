@@ -10,7 +10,10 @@ async function Header() {
         <header className="flex justify-between items-center pt-4 px-8">
             <div>
                 <Link href="/">
-                    <Volleyball size="52" className="text-primary" />
+                    <Volleyball
+                        size="52"
+                        className="text-primary hover:rotate-360 ease-linear duration-1000"
+                    />
                 </Link>
             </div>
             <div>

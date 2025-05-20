@@ -11,8 +11,8 @@ function ClientLayout({
 }>) {
     return (
         <SidebarProvider>
-            <AppSidebar />
             <main className="main relative w-full">
+                <AppSidebar />
                 <Header />
                 {children}
                 <Background />

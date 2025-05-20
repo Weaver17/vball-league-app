@@ -5,9 +5,9 @@ import React from "react";
 function AuthList() {
     return (
         <>
-            <div className="flex  gap-6 items-center p-6 border-b border-primary">
+            <div className="flex  gap-2 items-center p-6 border-b border-primary">
                 <Volleyball size="55" className="text-primary" />
-                <h3 className="font-bold">
+                <h3 className="font-bold text-center">
                     <Link href="/">Vball League App</Link>
                 </h3>
             </div>

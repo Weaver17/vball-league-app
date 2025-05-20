@@ -15,16 +15,18 @@ import React from "react";
 
 function AppSidebar() {
     return (
-        <Sidebar>
-            <SidebarHeader className=" font-bold text-xl border-b border-primary py-8 hover:text-primary">
-                <Link href="/">Vball League App</Link>
+        <Sidebar side="left" variant="floating">
+            <SidebarHeader className="font-bold text-xl border-b border-primary py-8 ">
+                <Link href="/" className="hover:text-primary">
+                    Vball League App
+                </Link>
             </SidebarHeader>
             <SidebarGroupContent>
                 <SidebarMenu className="gap-2">
                     {SIDEBAR_OPTIONS.map((option) => (
                         <SidebarMenuItem className="p-2" key={option.id}>
                             <SidebarMenuButton
-                                className="hover:bg-muted/75"
+                                className="hover:bg-secondary/50"
                                 asChild
                             >
                                 <Link href={option.url}>
@@ -36,8 +38,8 @@ function AppSidebar() {
                     ))}
                 </SidebarMenu>
             </SidebarGroupContent>
-            <SidebarFooter className="mt-auto mb-4 mx-auto">
-                User Avatar & Name
+            <SidebarFooter className="mt-auto mb-4 w-full border-t border-sidebar-border cursor-pointer hover:bg-sidebar-border/50">
+                <p className="mx-auto text-center py-2">User Avatar & Name</p>
             </SidebarFooter>
         </Sidebar>
     );
