@@ -6,7 +6,10 @@ import {
     TableBody,
     TableCell,
 } from "@/components/ui/table";
-import { TEMPORARY_CURRENT_LEAGUES } from "@/lib/constants";
+import {
+    CURRENT_LEAGUE_TABLEHEADS,
+    TEMPORARY_CURRENT_LEAGUES,
+} from "@/lib/constants";
 
 function CurrentLeaguesTable() {
     return (
@@ -17,14 +20,11 @@ function CurrentLeaguesTable() {
             <Table>
                 <TableHeader className="">
                     <TableRow>
-                        <TableHead className="text-center">Name</TableHead>
-                        <TableHead className="text-center">Level</TableHead>
-                        <TableHead className="text-center">
-                            Player Type
-                        </TableHead>
-                        <TableHead className="text-center">
-                            Court Type
-                        </TableHead>
+                        {CURRENT_LEAGUE_TABLEHEADS.map((head) => (
+                            <TableHead className="text-center" key={head.id}>
+                                {head.label}
+                            </TableHead>
+                        ))}
                     </TableRow>
                 </TableHeader>
                 <TableBody>
@@ -41,6 +41,9 @@ function CurrentLeaguesTable() {
                             </TableCell>
                             <TableCell className="text-center">
                                 {league.courtType}
+                            </TableCell>
+                            <TableCell className="text-center">
+                                {league.endDate}
                             </TableCell>
                         </TableRow>
                     ))}

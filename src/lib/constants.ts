@@ -1,20 +1,4 @@
-import {
-    Brackets,
-    BracketsIcon,
-    Group,
-    Home,
-    List,
-    ListCheck,
-    ListChecksIcon,
-    ListEnd,
-    ListIcon,
-    ListTree,
-    ListX,
-    PlayCircleIcon,
-    TorusIcon,
-    User,
-    Volleyball,
-} from "lucide-react";
+import { Group, Home, User, Volleyball } from "lucide-react";
 
 export const SIDEBAR_OPTIONS = [
     {
@@ -43,6 +27,29 @@ export const SIDEBAR_OPTIONS = [
     },
 ];
 
+export const CURRENT_LEAGUE_TABLEHEADS = [
+    {
+        id: 1,
+        label: "Name",
+    },
+    {
+        id: 2,
+        label: "Level",
+    },
+    {
+        id: 3,
+        label: "Player Type",
+    },
+    {
+        id: 4,
+        label: "Court Type",
+    },
+    {
+        id: 5,
+        label: "End Date",
+    },
+];
+
 export const TEMPORARY_CURRENT_LEAGUES = [
     {
         id: 1,
@@ -50,6 +57,7 @@ export const TEMPORARY_CURRENT_LEAGUES = [
         level: "A/AA",
         playerType: "Coed",
         courtType: "Court",
+        endDate: "6/8/25",
     },
     {
         id: 2,
@@ -57,6 +65,7 @@ export const TEMPORARY_CURRENT_LEAGUES = [
         level: "Open",
         playerType: "Mens",
         courtType: "Beach",
+        endDate: "6/8/25",
     },
     {
         id: 3,
@@ -64,6 +73,7 @@ export const TEMPORARY_CURRENT_LEAGUES = [
         level: "B",
         playerType: "Coed",
         courtType: "Court",
+        endDate: "6/8/25",
     },
     {
         id: 4,
@@ -71,6 +81,7 @@ export const TEMPORARY_CURRENT_LEAGUES = [
         level: "BB",
         playerType: "Coed",
         courtType: "Court",
+        endDate: "6/8/25",
     },
     {
         id: 5,
@@ -78,6 +89,7 @@ export const TEMPORARY_CURRENT_LEAGUES = [
         level: "Beer",
         playerType: "Coed",
         courtType: "Beach",
+        endDate: "6/8/25",
     },
     {
         id: 6,
@@ -85,5 +97,6 @@ export const TEMPORARY_CURRENT_LEAGUES = [
         level: "Semi",
         playerType: "Womens",
         courtType: "Court",
+        endDate: "6/8/25",
     },
 ];

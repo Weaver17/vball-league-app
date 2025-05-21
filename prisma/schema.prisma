@@ -2,8 +2,9 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "../src/generated/prisma"
+  provider        = "prisma-client-js"
+  output          = "../src/generated/prisma"
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
@@ -23,10 +24,12 @@ model Player {
   level              String
   gender             String
   preferredCourtType String
-  teams              Team[]   @relation("PlayerTeams")
+  teams              Team[]
   commissionerOf     League[]
   captainOf          Team[]   @relation("PlayerCaptainOf")
   captainId          String   @unique @default(cuid())
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
 
 model Team {
@@ -40,7 +43,9 @@ model Team {
   teamCaptainId String
   league        League   @relation(fields: [leagueId], references: [id])
   leagueId      String
-  players       Player[] @relation("PlayerTeams")
+  players       Player[]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 }
 
 model League {
@@ -58,4 +63,6 @@ model League {
   commissioner   Player   @relation(fields: [commissionerId], references: [id])
   commissionerId String
   teams          Team[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 }

@@ -1,8 +1,6 @@
 import {
     Sidebar,
-    SidebarContent,
     SidebarFooter,
-    SidebarGroup,
     SidebarGroupContent,
     SidebarHeader,
     SidebarMenu,
@@ -38,7 +36,7 @@ function AppSidebar() {
                     ))}
                 </SidebarMenu>
             </SidebarGroupContent>
-            <SidebarFooter className="mt-auto mb-4 w-full border-t border-sidebar-border cursor-pointer hover:bg-sidebar-border/50">
+            <SidebarFooter className="mt-auto mb-4 w-full border-t border-secondary cursor-pointer hover:bg-sidebar-border/50">
                 <p className="mx-auto text-center py-2">User Avatar & Name</p>
             </SidebarFooter>
         </Sidebar>
