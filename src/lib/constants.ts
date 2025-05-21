@@ -50,6 +50,80 @@ export const CURRENT_LEAGUE_TABLEHEADS = [
     },
 ];
 
+export const ALL_LEAGUES_TABLEHEADS = [
+    {
+        id: 1,
+        label: "Name",
+    },
+    {
+        id: 2,
+        label: "Level",
+    },
+    {
+        id: 3,
+        label: "Player Type",
+    },
+    {
+        id: 4,
+        label: "Court Type",
+    },
+    {
+        id: 5,
+        label: "Status",
+    },
+    {
+        id: 6,
+        label: "Start Date",
+    },
+    {
+        id: 7,
+        label: "End Date",
+    },
+    {
+        id: 8,
+        label: "Day(s)",
+    },
+    {
+        id: 9,
+        label: "Team Slots",
+    },
+];
+
+export const ALL_TEAMS_TABLEHEADS = [
+    {
+        id: 1,
+        label: "Name",
+    },
+    {
+        id: 2,
+        label: "Level",
+    },
+    {
+        id: 3,
+        label: "Player Type",
+    },
+    {
+        id: 4,
+        label: "Court Type",
+    },
+    {
+        id: 5,
+        label: "Open Positions",
+    },
+    {
+        id: 6,
+        label: "Team Captain",
+    },
+    {
+        id: 7,
+        label: "Players",
+    },
+    {
+        id: 8,
+        label: "League",
+    },
+];
+
 export const TEMPORARY_CURRENT_LEAGUES = [
     {
         id: 1,

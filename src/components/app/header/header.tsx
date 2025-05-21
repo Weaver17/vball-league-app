@@ -12,7 +12,7 @@ async function Header() {
                 <Link href="/">
                     <Volleyball
                         size="52"
-                        className="text-primary hover:rotate-360 ease-linear duration-1000"
+                        className="text-primary hover:animate-spin hover:[animation-duration:0.4s] hover:[animation-timing-function:linear]   "
                     />
                 </Link>
             </div>

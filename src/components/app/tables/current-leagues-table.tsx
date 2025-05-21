@@ -1,3 +1,4 @@
+import { getAllLeagues } from "@/actions/actions";
 import {
     Table,
     TableHeader,
@@ -6,12 +7,11 @@ import {
     TableBody,
     TableCell,
 } from "@/components/ui/table";
-import {
-    CURRENT_LEAGUE_TABLEHEADS,
-    TEMPORARY_CURRENT_LEAGUES,
-} from "@/lib/constants";
+import { CURRENT_LEAGUE_TABLEHEADS } from "@/lib/constants";
 
-function CurrentLeaguesTable() {
+async function CurrentLeaguesTable() {
+    const leagues = await getAllLeagues();
+
     return (
         <div className="w-[80%] space-y-4">
             <h4 className="underline font-semibold text-center">
@@ -28,7 +28,7 @@ function CurrentLeaguesTable() {
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    {TEMPORARY_CURRENT_LEAGUES.map((league) => (
+                    {leagues.map((league) => (
                         <TableRow key={league.id}>
                             <TableCell className="text-center">
                                 {league.name}
@@ -43,7 +43,7 @@ function CurrentLeaguesTable() {
                                 {league.courtType}
                             </TableCell>
                             <TableCell className="text-center">
-                                {league.endDate}
+                                {league.ends.toDateString()}
                             </TableCell>
                         </TableRow>
                     ))}
