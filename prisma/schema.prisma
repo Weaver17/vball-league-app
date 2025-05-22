@@ -34,12 +34,12 @@ model Player {
 }
 
 model Team {
-  id            String @id @default(cuid())
-  name          String
-  level         String
-  openPositions Int
-  playerType    String
-  courtType     String
+  id          String @id @default(cuid())
+  name        String
+  level       String
+  rosterSpots Int
+  playerType  String
+  courtType   String
 
   players       Player[] @relation("PlayerTeams")
   teamCaptain   Player?  @relation("TeamCaptain", fields: [teamCaptainId], references: [id])

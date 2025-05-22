@@ -116,11 +116,48 @@ export const ALL_TEAMS_TABLEHEADS = [
     },
     {
         id: 7,
-        label: "Players",
+        label: "Total Players",
     },
     {
         id: 8,
         label: "League",
+    },
+];
+
+export const ALL_PLAYERS_TABLEHEADS = [
+    {
+        id: 1,
+        label: "Name",
+    },
+    {
+        id: 2,
+        label: "Level",
+    },
+    {
+        id: 3,
+        label: "Main Position",
+    },
+    {
+        id: 4,
+        label: "Secondary Position",
+    },
+    {
+        id: 5,
+        label: "Height",
+    },
+    {
+        id: 6,
+        label: "Gender",
+    },
+
+    {
+        id: 7,
+        label: "Preferred Court Type",
+    },
+
+    {
+        id: 8,
+        label: "Teams",
     },
 ];
 

@@ -1,6 +1,8 @@
 import { Table, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import LeaguesTableBody from "./table-bodies/leagues-body";
 import TeamsTableBody from "./table-bodies/teams-body";
+import CurrentTableBody from "./table-bodies/current-body";
+import PlayerTableBody from "./table-bodies/player-body";
 
 type PageTableProps = {
     title: string;
@@ -27,6 +29,12 @@ function PageTable({ title, tableHeads, tableData }: PageTableProps) {
                 )}
                 {title == "All Teams" && (
                     <TeamsTableBody tableData={tableData} />
+                )}
+                {title == "Current Leagues" && (
+                    <CurrentTableBody tableData={tableData} />
+                )}
+                {title == "All Players" && (
+                    <PlayerTableBody tableData={tableData} />
                 )}
             </Table>
         </div>

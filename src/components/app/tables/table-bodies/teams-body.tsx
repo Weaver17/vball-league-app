@@ -1,5 +1,6 @@
 import { getLeagueById, getPlayerById, getTeamRoster } from "@/actions/actions";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
+import Link from "next/link";
 
 function TeamsTableBody({
     tableData,
@@ -15,10 +16,12 @@ function TeamsTableBody({
                 const captain = await getPlayerById(team.teamCaptainId ?? "");
                 const roster = await getTeamRoster(team.id);
 
+                const openPositions = team.rosterSpots - roster.length;
+
                 return (
                     <TableRow key={team.id}>
                         <TableCell className="text-center">
-                            {team.name}
+                            <Link href={`/teams/${team.id}`}>{team.name}</Link>
                         </TableCell>
                         <TableCell className="text-center">
                             {team.level}
@@ -30,22 +33,21 @@ function TeamsTableBody({
                             {team.courtType}
                         </TableCell>
                         <TableCell className="text-center">
-                            {team.openPositions}
+                            {openPositions}
                         </TableCell>
                         <TableCell className="text-center">
                             {captain?.firstName} {captain?.lastName}
                         </TableCell>
-                        <TableCell className="text-center">!!</TableCell>
-                        <TableCell className="text-center">
-                            {league?.name}
-                        </TableCell>
                         {roster.length > 0 ? (
                             <TableCell className="text-center">
-                                {roster.length}
+                                {roster.length}/{team.rosterSpots}
                             </TableCell>
                         ) : (
                             <TableCell className="text-center">0</TableCell>
                         )}
+                        <TableCell className="text-center">
+                            {league?.name}
+                        </TableCell>
                     </TableRow>
                 );
             })}

@@ -47,7 +47,7 @@ interface Team {
     id: string;
     name: string;
     level: string;
-    openPositions: number;
+    rosterSpots: number;
     playerType: string;
     courtType: string;
     players: Player[];

@@ -73,11 +73,42 @@ export const getTeamRoster = async (teamId: string) => {
             include: { players: true },
         });
 
-        console.log("Fetched team:", team);
-
         if (!team) return [];
 
         return team.players;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+export const getCurrentLeagues = async () => {
+    try {
+        const activeLeagues = await prisma.league.findMany({
+            where: {
+                status: "Active",
+            },
+        });
+
+        return activeLeagues;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+export const getAllPlayers = async () => {
+    try {
+        const teams = await prisma.player.findMany({
+            include: {
+                teams: true,
+                captainOf: true,
+                commissionerOf: true,
+                freeAgentIn: true,
+            },
+        });
+
+        return teams;
     } catch (e) {
         console.log(e);
         throw e;

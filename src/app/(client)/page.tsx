@@ -1,16 +1,12 @@
-import CurrentLeaguesTable from "@/components/app/tables/current-leagues-table";
-import {
-    Table,
-    TableCaption,
-    TableHeader,
-    TableRow,
-    TableHead,
-    TableBody,
-    TableCell,
-} from "@/components/ui/table";
+import { getCurrentLeagues } from "@/actions/actions";
+import PageTable from "@/components/app/tables/page-table";
+
+import { CURRENT_LEAGUE_TABLEHEADS } from "@/lib/constants";
 import React from "react";
 
-function Home() {
+async function Home() {
+    const currentLeagues = (await getCurrentLeagues()) as League[];
+
     return (
         <div className="section">
             <div className="container w-2/3  mt-12">
@@ -20,7 +16,11 @@ function Home() {
                 </h4>
             </div>
             <div className="container">
-                <CurrentLeaguesTable />
+                <PageTable
+                    title="Current Leagues"
+                    tableHeads={CURRENT_LEAGUE_TABLEHEADS}
+                    tableData={currentLeagues}
+                />
             </div>
         </div>
     );
