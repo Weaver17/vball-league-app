@@ -4,7 +4,7 @@ import PageTable from "@/components/app/tables/page-table";
 import { ALL_LEAGUES_TABLEHEADS } from "@/lib/constants";
 
 async function page() {
-    const leagues = await getAllLeagues();
+    const leagues = (await getAllLeagues()) as League[];
 
     return (
         <div className="container mt-4">

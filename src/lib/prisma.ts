@@ -1,20 +1,10 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@/generated/prisma";
 
-const prisma = new PrismaClient();
+const globalForPrisma = global as unknown as {
+    prisma: PrismaClient;
+};
 
-// const connectionString = `${process.env.DATABASE_URL}`;
-
-const globalForPrisma = global as unknown as { prisma: typeof prisma };
-
-// export const prisma =
-//   globalForPrisma.prisma ||
-//   new PrismaClient({
-//     datasources: {
-//       db: {
-//         url: connectionString,
-//       },
-//     },
-//   });
+const prisma = globalForPrisma.prisma || new PrismaClient();
 
 if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
 

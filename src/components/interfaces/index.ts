@@ -15,7 +15,10 @@ interface League {
     ends: Date;
     day: string;
     teamSlots: number;
-    commissionerId: string;
+    teams?: Team[];
+    commissioner?: Player;
+    commissionerId?: string;
+    freeAgents?: Player[];
     createdAt: Date;
     updatedAt: Date;
 }
@@ -32,7 +35,10 @@ interface Player {
     level: string;
     gender: string;
     preferredCourtType: string;
-    captainId: string;
+    teams: Team[];
+    captainOf: Team[];
+    commissionerOf: League[];
+    freeAgentIn: League[];
     createdAt: Date;
     updatedAt: Date;
 }
@@ -44,12 +50,11 @@ interface Team {
     openPositions: number;
     playerType: string;
     courtType: string;
-    teamCaptainId: string;
-    leagueId: string;
     players: Player[];
-    _count: {
-        players: number;
-    };
+    teamCaptain?: Player;
+    teamCaptainId?: string;
+    league?: League;
+    leagueId?: string;
     createdAt: Date;
     updatedAt: Date;
 }

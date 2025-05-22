@@ -2,9 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider        = "prisma-client-js"
-  output          = "../src/generated/prisma"
-  previewFeatures = ["driverAdapters"]
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
@@ -13,10 +12,10 @@ datasource db {
 }
 
 model Player {
-  id                 String   @id @default(cuid())
+  id                 String @id @default(cuid())
   firstName          String
   lastName           String
-  email              String   @unique
+  email              String @unique
   password           String
   mainPosition       String
   secondPosition     String
@@ -24,45 +23,53 @@ model Player {
   level              String
   gender             String
   preferredCourtType String
-  teams              Team[]
-  commissionerOf     League[]
-  captainOf          Team[]   @relation("PlayerCaptainOf")
-  captainId          String   @unique @default(cuid())
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+
+  teams          Team[]   @relation("PlayerTeams")
+  captainOf      Team[]   @relation("TeamCaptain")
+  commissionerOf League[] @relation("LeagueCommissioner")
+  freeAgentIn    League[] @relation("LeagueFreeAgents")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Team {
-  id            String   @id @default(cuid())
+  id            String @id @default(cuid())
   name          String
   level         String
   openPositions Int
   playerType    String
   courtType     String
-  teamCaptain   Player   @relation("PlayerCaptainOf", fields: [teamCaptainId], references: [captainId])
-  teamCaptainId String
-  league        League   @relation(fields: [leagueId], references: [id])
-  leagueId      String
-  players       Player[]
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+
+  players       Player[] @relation("PlayerTeams")
+  teamCaptain   Player?  @relation("TeamCaptain", fields: [teamCaptainId], references: [id])
+  teamCaptainId String?
+
+  league   League? @relation(fields: [leagueId], references: [id])
+  leagueId String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model League {
-  id             String   @id @default(cuid())
-  name           String   @unique
-  slug           String   @unique
-  level          String
-  playerType     String
-  courtType      String
-  status         String
-  starts         DateTime
-  ends           DateTime
-  day            String
-  teamSlots      Int
-  commissioner   Player   @relation(fields: [commissionerId], references: [id])
-  commissionerId String
+  id         String   @id @default(cuid())
+  name       String   @unique
+  slug       String   @unique
+  level      String
+  playerType String
+  courtType  String
+  status     String
+  starts     DateTime
+  ends       DateTime
+  day        String
+  teamSlots  Int
+
   teams          Team[]
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  commissioner   Player?  @relation("LeagueCommissioner", fields: [commissionerId], references: [id])
+  commissionerId String?
+  freeAgents     Player[] @relation("LeagueFreeAgents")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -4,7 +4,7 @@ import { ALL_TEAMS_TABLEHEADS } from "@/lib/constants";
 import React from "react";
 
 async function page() {
-    const teams = await getAllTeams();
+    const teams = (await getAllTeams()) as Team[];
 
     return (
         <div className="container mt-4">

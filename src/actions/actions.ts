@@ -6,6 +6,8 @@ export const getAllTeams = async () => {
     try {
         const teams = await prisma.team.findMany({
             include: {
+                players: true,
+                teamCaptain: true,
                 league: true,
             },
         });
@@ -22,6 +24,8 @@ export const getAllLeagues = async () => {
         const leagues = await prisma.league.findMany({
             include: {
                 teams: true,
+                commissioner: true,
+                freeAgents: true,
             },
         });
 
@@ -32,17 +36,50 @@ export const getAllLeagues = async () => {
     }
 };
 
-// export const getLeagueById = async () => {
-//     try {
-//         const leagues = await prisma.league.findMany({
-//             include: {
-//                 teams: true,
-//             },
-//         });
+export const getLeagueById = async (leagueId: string) => {
+    try {
+        const league = await prisma.league.findUnique({
+            where: {
+                id: leagueId,
+            },
+        });
 
-//         return leagues;
-//     } catch (e) {
-//         console.log(e);
-//         throw e;
-//     }
-// };
+        return league;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+export const getPlayerById = async (playerId: string) => {
+    try {
+        const player = await prisma.player.findUnique({
+            where: {
+                id: playerId,
+            },
+        });
+
+        return player;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+export const getTeamRoster = async (teamId: string) => {
+    try {
+        const team = await prisma.team.findUnique({
+            where: { id: teamId },
+            include: { players: true },
+        });
+
+        console.log("Fetched team:", team);
+
+        if (!team) return [];
+
+        return team.players;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
