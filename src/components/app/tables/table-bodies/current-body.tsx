@@ -1,4 +1,5 @@
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
+import Link from "next/link";
 
 function CurrentTableBody({
     tableData,
@@ -11,7 +12,11 @@ function CurrentTableBody({
         <TableBody>
             {leagues.map((league) => (
                 <TableRow key={league.id}>
-                    <TableCell className="text-center">{league.name}</TableCell>
+                    <TableCell className="text-center">
+                        <Link href={`/leagues/${league.id}`}>
+                            {league.name}
+                        </Link>
+                    </TableCell>
                     <TableCell className="text-center">
                         {league.level}
                     </TableCell>

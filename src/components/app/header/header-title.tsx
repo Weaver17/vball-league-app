@@ -3,11 +3,20 @@
 import { usePathname } from "next/navigation";
 
 const HeaderTitle = () => {
-    const pathname = usePathname(); // e.g. '/teams'
-    const segment = pathname.split("/").filter(Boolean).pop(); // 'teams'
+    const pathname = usePathname();
 
-    const title = segment
-        ? segment.charAt(0).toUpperCase() + segment.slice(1)
+    const segment = pathname.split("/");
+
+    let filteredSegment = segment.filter(Boolean).pop();
+
+    if (segment.length > 2) {
+        filteredSegment = " ";
+    }
+
+    console.log(segment);
+
+    const title = filteredSegment
+        ? filteredSegment.charAt(0).toUpperCase() + filteredSegment.slice(1)
         : "Home";
 
     return <h1>{title}</h1>;
