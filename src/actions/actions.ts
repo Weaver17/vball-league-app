@@ -42,6 +42,11 @@ export const getLeagueById = async (leagueId: string) => {
             where: {
                 id: leagueId,
             },
+            include: {
+                teams: true,
+                freeAgents: true,
+                commissioner: true,
+            },
         });
 
         return league;
@@ -56,6 +61,12 @@ export const getPlayerById = async (playerId: string) => {
         const player = await prisma.player.findUnique({
             where: {
                 id: playerId,
+            },
+            include: {
+                teams: true,
+                captainOf: true,
+                commissionerOf: true,
+                freeAgentIn: true,
             },
         });
 
@@ -109,6 +120,26 @@ export const getAllPlayers = async () => {
         });
 
         return teams;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+export const getTeamById = async (teamId: string) => {
+    try {
+        const team = await prisma.team.findUnique({
+            where: {
+                id: teamId,
+            },
+            include: {
+                players: true,
+                teamCaptain: true,
+                league: true,
+            },
+        });
+
+        return team;
     } catch (e) {
         console.log(e);
         throw e;

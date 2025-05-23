@@ -1,4 +1,13 @@
 import { Group, Home, User, Volleyball } from "lucide-react";
+import defaultProfilePic from "../../public/default-profile-pic.png";
+import defaultLeaguePic from "../../public/default-league-logo.svg";
+import defaultTeamPic from "../../public/default-team-logo.svg";
+
+export const images = {
+    defaultProfilePic,
+    defaultLeaguePic,
+    defaultTeamPic,
+} as any;
 
 export const SIDEBAR_OPTIONS = [
     {
