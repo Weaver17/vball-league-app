@@ -1,6 +1,6 @@
 import { getTeamById } from "@/actions/actions";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { images } from "@/lib/constants";
+import { BEACH_POSITIONS, images, INDOOR_POSITIONS } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
     return (
         <section className="section flex-row! gap-4">
             <div className="w-1/3">
-                <div className="container gap-4! ">
+                <div className="container gap-2! ">
                     <h3 className="text-center">{team?.name}</h3>
                     <div className="flex gap-4 justify-evenly">
                         <div className="flex flex-col gap-2 text-center">
@@ -27,7 +27,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                         </div>
                         <div className="flex flex-col gap-2 text-center">
                             <TeamLabel text="Roster Size" />
-                            <p>{team?.rosterSpots} Teams</p>
+                            <p>{team?.rosterSpots}</p>
                         </div>
                     </div>
                     {/* IMAGE  */}
@@ -39,6 +39,11 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                             className=""
                         />
                     </AspectRatio>
+                    {/* TEAM COACH  */}
+                    <div className="flex flex-col gap-2 text-center">
+                        <TeamLabel text="Head Coach" />
+                        <p>HEAD COACH</p>
+                    </div>
                 </div>
             </div>
             <div className="w-2/3">
@@ -75,17 +80,216 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                 </div>
                 <div className="container flex-row! justify-evenly gap-4">
                     <div className="text-center flex flex-col gap-4">
-                        <TeamLabel text="Teams" />
-                        {team?.players && team?.players.length > 0 ? (
-                            team.players.map((player) => (
-                                <p key={player.id}>
-                                    <Link href={`/players/${player.id}`}>
-                                        {player.firstName} {player.lastName}
-                                    </Link>
-                                </p>
-                            ))
-                        ) : (
-                            <p>None</p>
+                        {team?.courtType === "Beach" && (
+                            <div className="flex  gap-12 justify-evenly">
+                                <div className="space-y-2">
+                                    <TeamLabel
+                                        text={BEACH_POSITIONS[0].label}
+                                    />
+                                    {team?.players.map((player) => {
+                                        if (
+                                            player.mainPosition ===
+                                            BEACH_POSITIONS[0].position
+                                        ) {
+                                            return (
+                                                <p key={player.id}>
+                                                    <Link
+                                                        href={`/players/${player.id}`}
+                                                    >
+                                                        {player.firstName}{" "}
+                                                        {player.lastName}
+                                                    </Link>
+                                                </p>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                                <div className="space-y-2">
+                                    <TeamLabel
+                                        text={BEACH_POSITIONS[1].label}
+                                    />
+                                    {team?.players.map((player) => {
+                                        if (
+                                            player.mainPosition ===
+                                            BEACH_POSITIONS[1].position
+                                        ) {
+                                            return (
+                                                <p key={player.id}>
+                                                    <Link
+                                                        href={`/players/${player.id}`}
+                                                    >
+                                                        {player.firstName}{" "}
+                                                        {player.lastName}
+                                                    </Link>
+                                                </p>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                            </div>
+                        )}
+                        {team?.courtType === "Court" && (
+                            <div className="flex flex-wrap gap-4 justify-evenly">
+                                <div className="space-y-2">
+                                    <TeamLabel
+                                        text={INDOOR_POSITIONS[0].label}
+                                    />
+                                    {team?.players.map((player) => {
+                                        if (
+                                            player.mainPosition ===
+                                            INDOOR_POSITIONS[0].position
+                                        ) {
+                                            return (
+                                                <p key={player.id}>
+                                                    <Link
+                                                        href={`/players/${player.id}`}
+                                                    >
+                                                        {player.firstName}{" "}
+                                                        {player.lastName}
+                                                    </Link>
+                                                </p>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                                <div className="space-y-2">
+                                    <TeamLabel
+                                        text={INDOOR_POSITIONS[1].label}
+                                    />
+                                    {team?.players.map((player) => {
+                                        if (
+                                            player.mainPosition ===
+                                            INDOOR_POSITIONS[1].position
+                                        ) {
+                                            return (
+                                                <p key={player.id}>
+                                                    <Link
+                                                        href={`/players/${player.id}`}
+                                                    >
+                                                        {player.firstName}{" "}
+                                                        {player.lastName}
+                                                    </Link>
+                                                </p>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                                <div className="space-y-2">
+                                    <TeamLabel
+                                        text={INDOOR_POSITIONS[2].label}
+                                    />
+
+                                    {team?.players.map((player) => {
+                                        if (
+                                            player.mainPosition ===
+                                            INDOOR_POSITIONS[2].position
+                                        ) {
+                                            return (
+                                                <p key={player.id}>
+                                                    <Link
+                                                        href={`/players/${player.id}`}
+                                                    >
+                                                        {player.firstName}{" "}
+                                                        {player.lastName}
+                                                    </Link>
+                                                </p>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                                <div className="space-y-2">
+                                    <TeamLabel
+                                        text={INDOOR_POSITIONS[3].label}
+                                    />
+
+                                    {team?.players.map((player) => {
+                                        if (
+                                            player.mainPosition ===
+                                            INDOOR_POSITIONS[3].position
+                                        ) {
+                                            return (
+                                                <p key={player.id}>
+                                                    <Link
+                                                        href={`/players/${player.id}`}
+                                                    >
+                                                        {player.firstName}{" "}
+                                                        {player.lastName}
+                                                    </Link>
+                                                </p>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                                <div className="space-y-2">
+                                    <TeamLabel
+                                        text={INDOOR_POSITIONS[4].label}
+                                    />
+
+                                    {team?.players.map((player) => {
+                                        if (
+                                            player.mainPosition ===
+                                            INDOOR_POSITIONS[4].position
+                                        ) {
+                                            return (
+                                                <p key={player.id}>
+                                                    <Link
+                                                        href={`/players/${player.id}`}
+                                                    >
+                                                        {player.firstName}{" "}
+                                                        {player.lastName}
+                                                    </Link>
+                                                </p>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                                <div className="space-y-2">
+                                    <TeamLabel
+                                        text={INDOOR_POSITIONS[5].label}
+                                    />
+
+                                    {team?.players.map((player) => {
+                                        if (
+                                            player.mainPosition ===
+                                            INDOOR_POSITIONS[5].position
+                                        ) {
+                                            return (
+                                                <p key={player.id}>
+                                                    <Link
+                                                        href={`/players/${player.id}`}
+                                                    >
+                                                        {player.firstName}{" "}
+                                                        {player.lastName}
+                                                    </Link>
+                                                </p>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                                <div className="space-y-2">
+                                    <TeamLabel
+                                        text={INDOOR_POSITIONS[6].label}
+                                    />
+
+                                    {team?.players.map((player) => {
+                                        if (
+                                            player.mainPosition ===
+                                            INDOOR_POSITIONS[6].position
+                                        ) {
+                                            return (
+                                                <p key={player.id}>
+                                                    <Link
+                                                        href={`/players/${player.id}`}
+                                                    >
+                                                        {player.firstName}{" "}
+                                                        {player.lastName}
+                                                    </Link>
+                                                </p>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                            </div>
                         )}
                     </div>
                 </div>

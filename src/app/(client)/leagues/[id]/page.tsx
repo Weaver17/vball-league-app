@@ -39,6 +39,13 @@ async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
                             className=""
                         />
                     </AspectRatio>
+                    <div className="flex flex-col gap-4 items-center">
+                        <LeagueLabel text="Commissioner" />
+                        <p>
+                            {league?.commissioner?.firstName}{" "}
+                            {league?.commissioner?.lastName}
+                        </p>
+                    </div>
                 </div>
             </div>
             <div className="w-2/3">
@@ -85,29 +92,19 @@ async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
                             <p>None</p>
                         )}
                     </div>
-                    <div className="flex flex-col gap-8 justify-evenly text-center">
-                        <div className="flex flex-col gap-4">
-                            <LeagueLabel text="Commissioner" />
-                            <p>
-                                {league?.commissioner?.firstName}{" "}
-                                {league?.commissioner?.lastName}
-                            </p>
-                        </div>
-                        <div className="flex flex-col gap-4">
-                            <LeagueLabel text="Free Agents" />
-                            {league?.freeAgents &&
-                            league?.freeAgents.length > 0 ? (
-                                league.freeAgents.map((player) => (
-                                    <p key={player.id}>
-                                        <Link href={`/players/${player.id}`}>
-                                            {player.firstName} {player.lastName}
-                                        </Link>
-                                    </p>
-                                ))
-                            ) : (
-                                <p>None</p>
-                            )}
-                        </div>
+                    <div className="flex flex-col gap-4 text-center">
+                        <LeagueLabel text="Free Agents" />
+                        {league?.freeAgents && league?.freeAgents.length > 0 ? (
+                            league.freeAgents.map((player) => (
+                                <p key={player.id}>
+                                    <Link href={`/players/${player.id}`}>
+                                        {player.firstName} {player.lastName}
+                                    </Link>
+                                </p>
+                            ))
+                        ) : (
+                            <p>None</p>
+                        )}
                     </div>
                 </div>
             </div>

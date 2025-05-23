@@ -36,6 +36,57 @@ export const SIDEBAR_OPTIONS = [
     },
 ];
 
+export const BEACH_POSITIONS = [
+    {
+        id: 0,
+        label: "Blockers",
+        position: "Blocker",
+    },
+    {
+        id: 1,
+        label: "Defenders",
+        position: "Defender",
+    },
+];
+
+export const INDOOR_POSITIONS = [
+    {
+        id: 0,
+        label: "Setters",
+        position: "Setter",
+    },
+    {
+        id: 1,
+        label: "Outside Hitters",
+        position: "Outside Hitter",
+    },
+    {
+        id: 2,
+        label: "Middle Blockers",
+        position: "Middle Blocker",
+    },
+    {
+        id: 3,
+        label: "Opposites",
+        position: "Opposide",
+    },
+    {
+        id: 4,
+        label: "Right Side Hitters",
+        position: "Right Side Hitter",
+    },
+    {
+        id: 5,
+        label: "Liberos",
+        position: "Libero",
+    },
+    {
+        id: 6,
+        label: "Defensive Specialists",
+        position: "Defensive Specialist",
+    },
+];
+
 export const CURRENT_LEAGUE_TABLEHEADS = [
     {
         id: 1,
