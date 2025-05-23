@@ -58,3 +58,11 @@ interface Team {
     createdAt: Date;
     updatedAt: Date;
 }
+
+interface TLevelOfPlay {
+    id: number;
+    name: string;
+    title: string;
+    summary: string;
+    description: string[];
+}

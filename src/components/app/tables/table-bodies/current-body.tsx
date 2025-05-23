@@ -1,3 +1,4 @@
+import LevelHC from "@/components/hover-cards/level-hc";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import Link from "next/link";
 
@@ -18,8 +19,9 @@ function CurrentTableBody({
                         </Link>
                     </TableCell>
                     <TableCell className="text-center">
-                        {league.level}
+                        <LevelHC level={league.level} />
                     </TableCell>
+
                     <TableCell className="text-center">
                         {league.playerType}
                     </TableCell>
