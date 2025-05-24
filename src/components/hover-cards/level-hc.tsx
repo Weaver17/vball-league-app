@@ -3,6 +3,7 @@ import {
     HoverCardContent,
     HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { getLevelOfPlay } from "@/lib/utils";
 
 function LevelHC({ level }: { level: string }) {
     const playLevel = getLevelOfPlay(level);
@@ -28,27 +29,3 @@ function LevelHC({ level }: { level: string }) {
 }
 
 export default LevelHC;
-
-const OPEN = {
-    id: 1,
-    name: "Open",
-    title: "The Highest Level of Play",
-    summary:
-        "Superb players. Highly athletic. Indoors players use complex offenses. Beach teams have dynamic blocking calls. Passing is stellar",
-    description: [
-        "- Has the ability to hit with different hits at the same position",
-        "- Setters understand/run tempo sets and run different types of offenses",
-        "- Passes regularly get to the setter so they can set all three hitters",
-        "- Know what 5-1, 6-2, and 4-2 offenses are and how to use them",
-        " - Play with positions: outside hitter, middle hitter, right side hitter, setter, opposite and defensive specialist",
-    ],
-} as TLevelOfPlay;
-
-export const getLevelOfPlay = (level: string) => {
-    switch (level) {
-        case "Open":
-            return OPEN;
-        default:
-            return null;
-    }
-};

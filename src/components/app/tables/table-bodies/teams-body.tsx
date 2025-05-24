@@ -1,4 +1,5 @@
 import { getLeagueById, getPlayerById, getTeamRoster } from "@/actions/actions";
+import PlayerTypeHC from "@/components/hover-cards/player-type-hc";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import Link from "next/link";
 
@@ -27,7 +28,7 @@ function TeamsTableBody({
                             {team.level}
                         </TableCell>
                         <TableCell className="text-center">
-                            {team.playerType}
+                            <PlayerTypeHC type={team.playerType} />
                         </TableCell>
                         <TableCell className="text-center">
                             {team.courtType}

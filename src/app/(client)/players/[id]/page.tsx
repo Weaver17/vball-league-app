@@ -1,4 +1,5 @@
 import { getPlayerById } from "@/actions/actions";
+import LevelHC from "@/components/hover-cards/level-hc";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { images } from "@/lib/constants";
 import Image from "next/image";
@@ -24,9 +25,9 @@ async function PlayerIdPage({ params }: { params: Promise<{ id: string }> }) {
                         {player?.firstName} {player?.lastName}
                     </h3>
                     <div className="flex gap-4 justify-evenly">
-                        <div className="flex flex-col gap-2 text-center">
+                        <div className="flex flex-col gap-1 text-center">
                             <ProfileLabel text="Level" />
-                            <p>{player?.level}</p>
+                            <LevelHC level={player?.level ?? ""} />
                         </div>
                         <div className="flex flex-col gap-2 text-center">
                             <ProfileLabel text="Main Position" />

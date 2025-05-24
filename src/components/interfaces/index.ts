@@ -66,3 +66,9 @@ interface TLevelOfPlay {
     summary: string;
     description: string[];
 }
+
+interface TPlayerType {
+    id: number;
+    name: string;
+    summary: string;
+}

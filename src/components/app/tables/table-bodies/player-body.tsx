@@ -1,4 +1,5 @@
 import { getLeagueById, getPlayerById, getTeamRoster } from "@/actions/actions";
+import LevelHC from "@/components/hover-cards/level-hc";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import Link from "next/link";
 
@@ -19,7 +20,7 @@ function PlayerTableBody({
                         </Link>
                     </TableCell>
                     <TableCell className="text-center">
-                        {player.level}
+                        <LevelHC level={player.level} />
                     </TableCell>
                     <TableCell className="text-center">
                         {player.mainPosition}

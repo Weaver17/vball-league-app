@@ -1,4 +1,5 @@
 import LevelHC from "@/components/hover-cards/level-hc";
+import PlayerTypeHC from "@/components/hover-cards/player-type-hc";
 import { TableBody, TableCell, TableRow } from "@/components/ui/table";
 import Link from "next/link";
 
@@ -23,7 +24,7 @@ function CurrentTableBody({
                     </TableCell>
 
                     <TableCell className="text-center">
-                        {league.playerType}
+                        <PlayerTypeHC type={league.playerType} />
                     </TableCell>
                     <TableCell className="text-center">
                         {league.courtType}

@@ -1,4 +1,5 @@
 import { getTeamById } from "@/actions/actions";
+import LevelHC from "@/components/hover-cards/level-hc";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { BEACH_POSITIONS, images, INDOOR_POSITIONS } from "@/lib/constants";
 import Image from "next/image";
@@ -21,9 +22,9 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                 <div className="container gap-2! ">
                     <h3 className="text-center">{team?.name}</h3>
                     <div className="flex gap-4 justify-evenly">
-                        <div className="flex flex-col gap-2 text-center">
+                        <div className="flex flex-col gap-1 text-center">
                             <TeamLabel text="Level" />
-                            <p>{team?.level}</p>
+                            <LevelHC level={team?.level ?? ""} />
                         </div>
                         <div className="flex flex-col gap-2 text-center">
                             <TeamLabel text="Roster Size" />

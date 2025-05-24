@@ -1,4 +1,5 @@
 import { getLeagueById } from "@/actions/actions";
+import LevelHC from "@/components/hover-cards/level-hc";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { images } from "@/lib/constants";
 import Image from "next/image";
@@ -21,9 +22,9 @@ async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
                 <div className="container gap-4! ">
                     <h3 className="text-center">{league?.name}</h3>
                     <div className="flex gap-4 justify-evenly">
-                        <div className="flex flex-col gap-2 text-center">
+                        <div className="flex flex-col gap-1 text-center">
                             <LeagueLabel text="Level" />
-                            <p>{league?.level}</p>
+                            <LevelHC level={league?.level ?? ""} />
                         </div>
                         <div className="flex flex-col gap-2 text-center">
                             <LeagueLabel text="League Size" />
