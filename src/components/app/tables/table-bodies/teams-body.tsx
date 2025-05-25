@@ -37,7 +37,9 @@ function TeamsTableBody({
                             {openPositions}
                         </TableCell>
                         <TableCell className="text-center">
-                            {captain?.firstName} {captain?.lastName}
+                            <Link href={`/players/${captain?.id}`}>
+                                {captain?.firstName} {captain?.lastName}
+                            </Link>
                         </TableCell>
                         {roster.length > 0 ? (
                             <TableCell className="text-center">
