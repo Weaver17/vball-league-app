@@ -1,12 +1,12 @@
 import React from "react";
 import AuthFormInput from "./form-input";
-import AuthFormFooter from "./form-footer";
 import { UseFormReturn } from "react-hook-form";
+import { PlayerSignIn } from "@/components/interfaces/types";
 
 function SignInFormBody({
     formData,
 }: {
-    formData: UseFormReturn<InitialUser | PlayerSignIn>;
+    formData: UseFormReturn<PlayerSignIn>;
 }) {
     return (
         <>

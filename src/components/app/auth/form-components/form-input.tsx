@@ -10,8 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Control } from "react-hook-form";
 
 type AuthFormInputProps = {
-    formControl: Control<InitialUser | PlayerSignIn>;
-    name: keyof InitialUser;
+    formControl: Control<any>;
+    name: string;
     label: string;
     type: string;
     placeholder: string;

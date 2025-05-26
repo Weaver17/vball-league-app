@@ -72,16 +72,3 @@ interface TPlayerType {
     name: string;
     summary: string;
 }
-
-interface InitialUser {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-}
-
-interface PlayerSignIn {
-    email: string;
-    password: string;
-}
