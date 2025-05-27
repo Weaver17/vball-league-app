@@ -1,6 +1,6 @@
 "use client";
 
-import { createInitialUser } from "@/actions/actions";
+import { createAnInitialUser } from "@/actions/actions";
 import AuthForm from "@/components/app/auth/auth-form";
 import SignUpFormBody from "@/components/app/auth/form-components/sign-up-body";
 import { ThemeBtn } from "@/components/buttons/theme-btn";
@@ -23,12 +23,8 @@ function RegisterPage() {
 
     async function handleSignUpClick() {
         try {
-            await createInitialUser({
-                email: signUpForm.getValues("email"),
-                password: signUpForm.getValues("password"),
-                firstName: signUpForm.getValues("firstName"),
-                lastName: signUpForm.getValues("lastName"),
-            } as InitialUser);
+            await createAnInitialUser(signUpForm.getValues());
+            console.log(signUpForm.getValues());
             router.push("/sign-up/create-player");
         } catch (e) {
             console.log(e);

@@ -13,8 +13,6 @@ const HeaderTitle = () => {
         filteredSegment = " ";
     }
 
-    console.log(segment);
-
     const title = filteredSegment
         ? filteredSegment.charAt(0).toUpperCase() + filteredSegment.slice(1)
         : "Home";

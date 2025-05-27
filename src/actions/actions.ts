@@ -1,6 +1,13 @@
 "use server";
 
+import { InitialUser, PlayerSignIn } from "@/components/interfaces/types";
 import prisma from "@/lib/prisma";
+import { initialUserSchema } from "@/schema/auth/initialUserSchema";
+import { redirect } from "next/navigation";
+import bcrypt from "bcryptjs";
+import { createSession } from "@/lib/sessions";
+
+// GETS
 
 export const getAllTeams = async () => {
     try {
@@ -145,3 +152,138 @@ export const getTeamById = async (teamId: string) => {
         throw e;
     }
 };
+
+export const getPlayerByEmail = async ({ email, password }: PlayerSignIn) => {
+    try {
+        const player = await prisma.player.findUnique({
+            where: {
+                email: email,
+            },
+        });
+
+        if (!player) {
+            throw new Error("Player not found");
+        }
+
+        if (player.password !== password) {
+            throw new Error("Incorrect password");
+        }
+
+        return player;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+// POSTS
+
+export const createAnInitialUser = async (formData: InitialUser) => {
+    try {
+        const validationResults = initialUserSchema.safeParse({
+            email: formData.email,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            password: formData.password,
+        });
+
+        if (!validationResults.success) {
+            return {
+                errors: validationResults.error.flatten().fieldErrors,
+            };
+        }
+
+        // Create User
+        const { email, firstName, lastName, password } = formData;
+
+        const existingUser = await prisma.initialUser.findUnique({
+            where: {
+                email: email,
+            },
+        });
+
+        if (existingUser) {
+            throw new Error("Email already in use");
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const initialUser = await prisma.initialUser.create({
+            data: {
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
+                password: hashedPassword,
+            },
+        });
+
+        return initialUser;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+// export const createInitialUser = async (formData: InitialUser) => {
+//     try {
+//         // Validate Fields
+//         const validationResults = initialUserSchema.safeParse({
+//             email: formData.email,
+//             firstName: formData.firstName,
+//             lastName: formData.lastName,
+//             password: formData.password,
+//         });
+
+//         if (!validationResults.success) {
+//             return {
+//                 errors: validationResults.error.flatten().fieldErrors,
+//             };
+//         }
+
+//         // Create User
+//         const { email, firstName, lastName, password } = formData;
+
+//         const existingUser = await prisma.initialUser.findUnique({
+//             where: {
+//                 email: email,
+//             },
+//         });
+
+//         if (existingUser) {
+//             throw new Error("Email already in use");
+//         }
+
+//         const hashedPassword = await bcrypt.hash(password, 10);
+
+//         const initialUser = await prisma.initialUser.create({
+//             data: {
+//                 email: email,
+//                 firstName: firstName,
+//                 lastName: lastName,
+//                 password: hashedPassword,
+//             },
+//         });
+
+//         // Create Session
+//         await createSession(initialUser.id);
+//     } catch (e) {
+//         console.log(e);
+//         throw e;
+//     }
+// };
+
+// HANDLES
+
+// async function handleSignUpClick() {
+//     try {
+//         await createInitialUser({
+//             email: signUpForm.getValues("email"),
+//             password: signUpForm.getValues("password"),
+//             firstName: signUpForm.getValues("firstName"),
+//             lastName: signUpForm.getValues("lastName"),
+//         } as InitialUser);
+//         redirect("/sign-up/create-player");
+//     } catch (e) {
+//         console.log(e);
+//         throw e;
+//     }
+// }
