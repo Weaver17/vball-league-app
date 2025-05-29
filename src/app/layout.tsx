@@ -5,6 +5,10 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import {
+    PlayerContext,
+    PlayerContextProvider,
+} from "@/contexts/player-context";
 
 const sansFont = fontSans({
     variable: "--font-font-sans",
@@ -37,7 +41,7 @@ export default function RootLayout({
                     enableSystem
                     disableTransitionOnChange
                 >
-                    {children}
+                    <PlayerContextProvider>{children}</PlayerContextProvider>
                 </ThemeProvider>
             </body>
         </html>

@@ -5,3 +5,24 @@ import z from "zod";
 export type InitialUser = z.infer<typeof initialUserSchema>;
 
 export type PlayerSignIn = z.infer<typeof playerSignInSchema>;
+
+// for context
+export type TPlayer = {
+    id: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    mainPosition: string;
+    secondPosition: string;
+    height: string;
+    level: string;
+    gender: string;
+    preferredCourtType: string;
+    teams: Team[];
+    captainOf: Team[];
+    commissionerOf: League[];
+    freeAgentIn: League[];
+    createdAt: Date;
+    updatedAt: Date;
+};

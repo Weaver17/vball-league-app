@@ -1,3 +1,4 @@
+"use client";
 import {
     Sidebar,
     SidebarFooter,
@@ -7,11 +8,14 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import usePlayerContext from "@/hooks/use-player-context";
 import { SIDEBAR_OPTIONS } from "@/lib/constants";
 import Link from "next/link";
 import React from "react";
 
 function AppSidebar() {
+    const { isLoggedIn, player } = usePlayerContext();
+
     return (
         <Sidebar side="left" variant="floating">
             <SidebarHeader className="font-bold text-xl border-b border-primary py-8 ">
@@ -37,7 +41,17 @@ function AppSidebar() {
                 </SidebarMenu>
             </SidebarGroupContent>
             <SidebarFooter className="mt-auto mb-4 w-full border-t border-secondary cursor-pointer hover:bg-sidebar-border/50">
-                <p className="mx-auto text-center py-2">User Avatar & Name</p>
+                {isLoggedIn ? (
+                    <p className="mx-auto text-center py-2">
+                        <Link href={`players/${player.id}`}>
+                            {player.firstName} {player.lastName}
+                        </Link>
+                    </p>
+                ) : (
+                    <p className="mx-auto text-center py-2">
+                        User Avatar & Name
+                    </p>
+                )}
             </SidebarFooter>
         </Sidebar>
     );
