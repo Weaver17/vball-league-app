@@ -13,8 +13,9 @@ export type TPlayer = {
     lastName: string;
     email: string;
     password: string;
-    mainPosition: string;
-    secondPosition: string;
+    mainIndoorPosition: string;
+    secondIndoorPosition: string;
+    beachPosition: string;
     height: string;
     level: string;
     gender: string;

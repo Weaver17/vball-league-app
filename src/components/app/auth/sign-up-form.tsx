@@ -26,8 +26,12 @@ function SignUpForm() {
 
     async function onSignUpSubmit() {
         try {
-            await createAnInitialUser(signUpForm.getValues());
-            console.log(signUpForm.getValues());
+            await createAnInitialUser({
+                email: signUpForm.getValues("email"),
+                firstName: signUpForm.getValues("firstName"),
+                lastName: signUpForm.getValues("lastName"),
+                password: signUpForm.getValues("password"),
+            } as InitialUser);
             router.push("/sign-up/create-player");
         } catch (e) {
             console.log(e);

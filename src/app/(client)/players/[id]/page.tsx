@@ -31,7 +31,7 @@ async function PlayerIdPage({ params }: { params: Promise<{ id: string }> }) {
                         </div>
                         <div className="flex flex-col gap-2 text-center">
                             <ProfileLabel text="Main Position" />
-                            <p>{player?.mainPosition}</p>
+                            <p>{player?.mainIndoorPosition}</p>
                         </div>
                     </div>
                     {/* IMAGE  */}
@@ -47,7 +47,7 @@ async function PlayerIdPage({ params }: { params: Promise<{ id: string }> }) {
             </div>
             <div className="w-2/3">
                 <div className="container">
-                    <div className="flex gap-4 justify-evenly">
+                    <div className="flex gap-4 justify-evenly mb-4">
                         <div className="flex flex-col gap-2 text-center">
                             <ProfileLabel text="Gender" />
                             <p>{player?.gender}</p>
@@ -56,6 +56,8 @@ async function PlayerIdPage({ params }: { params: Promise<{ id: string }> }) {
                             <ProfileLabel text="Height" />
                             <p>{player?.height}</p>
                         </div>
+                    </div>
+                    <div className="flex gap-4 justify-evenly">
                         <div className="flex flex-col gap-2 text-center">
                             <ProfileLabel text="Preferred Court Type" />
                             <p>{player?.preferredCourtType}</p>
@@ -63,7 +65,11 @@ async function PlayerIdPage({ params }: { params: Promise<{ id: string }> }) {
 
                         <div className="flex flex-col gap-2 text-center">
                             <ProfileLabel text="Secondary Position" />
-                            <p>{player?.secondPosition}</p>
+                            <p>{player?.secondIndoorPosition}</p>
+                        </div>
+                        <div className="flex flex-col gap-2 text-center">
+                            <ProfileLabel text="Beach Position" />
+                            <p>{player?.beachPosition}</p>
                         </div>
                     </div>
                 </div>

@@ -39,51 +39,66 @@ export const SIDEBAR_OPTIONS = [
 export const BEACH_POSITIONS = [
     {
         id: 0,
-        label: "Blockers",
-        position: "Blocker",
+        group: "Blockers",
+        label: "Blocker",
     },
     {
         id: 1,
-        label: "Defenders",
-        position: "Defender",
+        group: "Defenders",
+        label: "Defender",
+    },
+    {
+        id: 2,
+        group: "Hybrids",
+        label: "Hybrid",
+    },
+    {
+        id: 3,
+        group: "None",
+        label: "None",
     },
 ];
 
 export const INDOOR_POSITIONS = [
     {
         id: 0,
-        label: "Setters",
-        position: "Setter",
+        group: "Setters",
+        label: "Setter",
     },
     {
         id: 1,
-        label: "Outside Hitters",
-        position: "Outside Hitter",
+        group: "Outside Hitters",
+        label: "Outside Hitter",
     },
     {
         id: 2,
-        label: "Middle Blockers",
-        position: "Middle Blocker",
+        group: "Middle Blockers",
+        label: "Middle Blocker",
     },
     {
         id: 3,
-        label: "Opposites",
-        position: "Opposide",
+        group: "Opposites",
+        label: "Opposite",
     },
     {
         id: 4,
-        label: "Right Side Hitters",
-        position: "Right Side Hitter",
+        group: "Right Side Hitters",
+        label: "Right Side Hitter",
     },
     {
         id: 5,
-        label: "Liberos",
-        position: "Libero",
+        group: "Liberos",
+        label: "Libero",
     },
     {
         id: 6,
-        label: "Defensive Specialists",
-        position: "Defensive Specialist",
+        group: "Defensive Specialists",
+        label: "Defensive Specialist",
+    },
+    {
+        id: 7,
+        group: "None",
+        label: "None",
     },
 ];
 
@@ -195,28 +210,33 @@ export const ALL_PLAYERS_TABLEHEADS = [
     },
     {
         id: 3,
-        label: "Main Position",
+        label: "Main Indoor Position",
     },
     {
         id: 4,
-        label: "Secondary Position",
+        label: "Secondary Indoor Position",
     },
     {
         id: 5,
+        label: "Beach Position",
+    },
+
+    {
+        id: 6,
         label: "Height",
     },
     {
-        id: 6,
+        id: 7,
         label: "Gender",
     },
 
     {
-        id: 7,
+        id: 8,
         label: "Preferred Court Type",
     },
 
     {
-        id: 8,
+        id: 9,
         label: "Teams",
     },
 ];
@@ -269,5 +289,84 @@ export const TEMPORARY_CURRENT_LEAGUES = [
         playerType: "Womens",
         courtType: "Court",
         endDate: "6/8/25",
+    },
+];
+
+export const CREATE_PLAYER_HEIGHTS = Array.from(
+    { length: 91 - 58 + 1 },
+    (_, i) => {
+        const totalInches = i + 58;
+        const feet = Math.floor(totalInches / 12);
+        const inches = totalInches % 12;
+        return {
+            id: i + 1,
+            label: `${feet}'${inches}"`,
+        };
+    }
+);
+
+export const CREATE_PLAYER_GENDERS = [
+    {
+        id: 1,
+        label: "Male",
+    },
+    {
+        id: 2,
+        label: "Female",
+    },
+    {
+        id: 3,
+        label: "Other",
+    },
+    {
+        id: 4,
+        label: "Prefer Not to Say",
+    },
+];
+
+export const COURT_TYPES = [
+    {
+        id: 1,
+        label: "Beach",
+    },
+    {
+        id: 2,
+        label: "Court",
+    },
+];
+
+export const LEVELS_OF_PLAY = [
+    {
+        id: 1,
+        label: "Open",
+    },
+    {
+        id: 2,
+        label: "A",
+    },
+    {
+        id: 3,
+        label: "AA",
+    },
+    {
+        id: 4,
+        label: "B",
+    },
+    {
+        id: 5,
+        label: "BB",
+    },
+    {
+        id: 6,
+        label: "C",
+    },
+    {
+        id: 7,
+        label: "CC",
+    },
+
+    {
+        id: 8,
+        label: "Beer",
     },
 ];

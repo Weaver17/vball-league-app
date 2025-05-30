@@ -89,8 +89,8 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     />
                                     {team?.players.map((player) => {
                                         if (
-                                            player.mainPosition ===
-                                            BEACH_POSITIONS[0].position
+                                            player.beachPosition ===
+                                            BEACH_POSITIONS[0].label
                                         ) {
                                             return (
                                                 <p key={player.id}>
@@ -111,8 +111,30 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     />
                                     {team?.players.map((player) => {
                                         if (
-                                            player.mainPosition ===
-                                            BEACH_POSITIONS[1].position
+                                            player.beachPosition ===
+                                            BEACH_POSITIONS[1].label
+                                        ) {
+                                            return (
+                                                <p key={player.id}>
+                                                    <Link
+                                                        href={`/players/${player.id}`}
+                                                    >
+                                                        {player.firstName}{" "}
+                                                        {player.lastName}
+                                                    </Link>
+                                                </p>
+                                            );
+                                        }
+                                    })}
+                                </div>
+                                <div className="space-y-2">
+                                    <TeamLabel
+                                        text={BEACH_POSITIONS[2].label}
+                                    />
+                                    {team?.players.map((player) => {
+                                        if (
+                                            player.beachPosition ===
+                                            BEACH_POSITIONS[2].label
                                         ) {
                                             return (
                                                 <p key={player.id}>
@@ -137,8 +159,8 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     />
                                     {team?.players.map((player) => {
                                         if (
-                                            player.mainPosition ===
-                                            INDOOR_POSITIONS[0].position
+                                            player.mainIndoorPosition ===
+                                            INDOOR_POSITIONS[0].label
                                         ) {
                                             return (
                                                 <p key={player.id}>
@@ -159,8 +181,8 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     />
                                     {team?.players.map((player) => {
                                         if (
-                                            player.mainPosition ===
-                                            INDOOR_POSITIONS[1].position
+                                            player.mainIndoorPosition ===
+                                            INDOOR_POSITIONS[1].label
                                         ) {
                                             return (
                                                 <p key={player.id}>
@@ -182,8 +204,8 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
 
                                     {team?.players.map((player) => {
                                         if (
-                                            player.mainPosition ===
-                                            INDOOR_POSITIONS[2].position
+                                            player.mainIndoorPosition ===
+                                            INDOOR_POSITIONS[2].label
                                         ) {
                                             return (
                                                 <p key={player.id}>
@@ -205,8 +227,8 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
 
                                     {team?.players.map((player) => {
                                         if (
-                                            player.mainPosition ===
-                                            INDOOR_POSITIONS[3].position
+                                            player.mainIndoorPosition ===
+                                            INDOOR_POSITIONS[3].label
                                         ) {
                                             return (
                                                 <p key={player.id}>
@@ -228,8 +250,8 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
 
                                     {team?.players.map((player) => {
                                         if (
-                                            player.mainPosition ===
-                                            INDOOR_POSITIONS[4].position
+                                            player.mainIndoorPosition ===
+                                            INDOOR_POSITIONS[4].label
                                         ) {
                                             return (
                                                 <p key={player.id}>
@@ -251,8 +273,8 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
 
                                     {team?.players.map((player) => {
                                         if (
-                                            player.mainPosition ===
-                                            INDOOR_POSITIONS[5].position
+                                            player.mainIndoorPosition ===
+                                            INDOOR_POSITIONS[5].label
                                         ) {
                                             return (
                                                 <p key={player.id}>
@@ -274,8 +296,8 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
 
                                     {team?.players.map((player) => {
                                         if (
-                                            player.mainPosition ===
-                                            INDOOR_POSITIONS[6].position
+                                            player.mainIndoorPosition ===
+                                            INDOOR_POSITIONS[6].label
                                         ) {
                                             return (
                                                 <p key={player.id}>

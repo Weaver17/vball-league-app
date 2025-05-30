@@ -20,17 +20,18 @@ model InitialUser {
 }
 
 model Player {
-  id                 String @id @default(cuid())
-  firstName          String
-  lastName           String
-  email              String @unique
-  password           String
-  mainPosition       String
-  secondPosition     String
-  height             String
-  level              String
-  gender             String
-  preferredCourtType String
+  id                   String @id @default(cuid())
+  firstName            String
+  lastName             String
+  email                String @unique
+  password             String
+  mainIndoorPosition   String
+  secondIndoorPosition String
+  beachPosition        String
+  height               String
+  level                String
+  gender               String
+  preferredCourtType   String
 
   teams          Team[]   @relation("PlayerTeams")
   captainOf      Team[]   @relation("TeamCaptain")

@@ -22,10 +22,13 @@ function PlayerTableBody({
                         <LevelHC level={player.level} />
                     </TableCell>
                     <TableCell className="text-center">
-                        {player.mainPosition}
+                        {player.mainIndoorPosition}
                     </TableCell>
                     <TableCell className="text-center">
-                        {player.secondPosition}
+                        {player.secondIndoorPosition}
+                    </TableCell>
+                    <TableCell className="text-center">
+                        {player.beachPosition}
                     </TableCell>
                     <TableCell className="text-center">
                         {player.height}

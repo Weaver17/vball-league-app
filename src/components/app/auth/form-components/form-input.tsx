@@ -42,7 +42,7 @@ function AuthFormInput({
                         />
                     </FormControl>
                     <FormDescription>{description}</FormDescription>
-                    <FormMessage />
+                    <FormMessage></FormMessage>
                 </FormItem>
             )}
         />
