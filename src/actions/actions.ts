@@ -1,11 +1,16 @@
 "use server";
 
-import { InitialUser, PlayerSignIn } from "@/components/interfaces/types";
+import {
+    InitialUser,
+    PlayerSignIn,
+    TPlayer,
+} from "@/components/interfaces/types";
 import prisma from "@/lib/prisma";
 import { initialUserSchema } from "@/schema/auth/initialUserSchema";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 import { createSession } from "@/lib/sessions";
+import { playerSchema } from "@/schema/auth/playerSchema";
 
 // GETS
 
@@ -178,13 +183,20 @@ export const getPlayerByEmail = async ({ email, password }: PlayerSignIn) => {
 
 // POSTS
 
-export const createAnInitialUser = async (formData: InitialUser) => {
+export const createPlayer = async (formData: TPlayer) => {
     try {
-        const validationResults = initialUserSchema.safeParse({
+        const validationResults = playerSchema.safeParse({
             email: formData.email,
             firstName: formData.firstName,
             lastName: formData.lastName,
             password: formData.password,
+            mainIndoorPosition: formData.mainIndoorPosition,
+            secondIndoorPosition: formData.secondIndoorPosition,
+            beachPosition: formData.beachPosition,
+            height: formData.height,
+            level: formData.level,
+            gender: formData.gender,
+            preferredCourtType: formData.preferredCourtType,
         });
 
         if (!validationResults.success) {
@@ -193,30 +205,51 @@ export const createAnInitialUser = async (formData: InitialUser) => {
             };
         }
 
-        // Create User
-        const { email, firstName, lastName, password } = formData;
+        const {
+            email,
+            firstName,
+            lastName,
+            password,
+            mainIndoorPosition,
+            secondIndoorPosition,
+            beachPosition,
+            height,
+            level,
+            gender,
+            preferredCourtType,
+        } = formData;
 
-        const existingUser = await prisma.initialUser.findUnique({
+        const existingUser = await prisma.player.findUnique({
             where: {
                 email: email,
             },
         });
 
         if (existingUser) {
-            throw new Error("Email already in use");
+            return {
+                errors: {
+                    email: ["Email already in use"],
+                },
+            };
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
-        const initialUser = await prisma.initialUser.create({
+        const player = await prisma.player.create({
             data: {
                 email: email,
                 firstName: firstName,
                 lastName: lastName,
-                password: hashedPassword,
+                password: password,
+                mainIndoorPosition: mainIndoorPosition,
+                secondIndoorPosition: secondIndoorPosition,
+                beachPosition: beachPosition,
+                height: height,
+                level: level,
+                gender: gender,
+                preferredCourtType: preferredCourtType,
             },
         });
 
-        return initialUser;
+        return player;
     } catch (e) {
         console.log(e);
         throw e;
