@@ -9,8 +9,9 @@ import prisma from "@/lib/prisma";
 import { initialUserSchema } from "@/schema/auth/initialUserSchema";
 import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
-import { createSession } from "@/lib/sessions";
+import { createSession, deleteSession, verifySession } from "@/lib/sessions";
 import { playerSchema } from "@/schema/auth/playerSchema";
+import { equal } from "assert";
 
 // GETS
 
@@ -174,7 +175,33 @@ export const getPlayerByEmail = async ({ email, password }: PlayerSignIn) => {
             throw new Error("Incorrect password");
         }
 
+        // Create Session
+        await createSession(player.id);
+
         return player;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+export const getPlayer = async () => {
+    try {
+        const session = await verifySession();
+
+        if (!session) {
+            return null;
+        }
+
+        const currentPlayer = await prisma.player.findUnique({
+            where: {
+                id: session.userId as string,
+            },
+        });
+
+        console.log(currentPlayer);
+
+        return currentPlayer;
     } catch (e) {
         console.log(e);
         throw e;
@@ -249,7 +276,28 @@ export const createPlayer = async (formData: TPlayer) => {
             },
         });
 
+        // Create Session
+        await createSession(player.id);
+
         return player;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+// DELETE SESSION
+export const deleteCurrentSession = async () => {
+    try {
+        const session = await verifySession();
+
+        if (!session) {
+            return null;
+        }
+
+        await deleteSession();
+
+        return true;
     } catch (e) {
         console.log(e);
         throw e;

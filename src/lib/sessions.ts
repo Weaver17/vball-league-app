@@ -2,6 +2,7 @@ import "server-only"; // Ensure this file is only used on the server side
 import { JWTPayload, SignJWT, jwtVerify } from "jose";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
+import { revalidatePath } from "next/cache";
 
 const key = new TextEncoder().encode(process.env.JWT_SECRET);
 
@@ -37,7 +38,6 @@ export async function createSession(userId: string) {
     const session = await encrypt({ userId, expires: expires.toISOString() });
 
     (await cookies()).set(cookie.name, session, { expires });
-    redirect("/");
 }
 
 // VERIFY SESSION
@@ -45,8 +45,8 @@ export async function verifySession() {
     const currentCookie = (await cookies()).get(cookie.name)?.value;
     const session = await decrypt(currentCookie ?? "");
 
-    if (!session?.userId) {
-        redirect("/sign-in");
+    if (!session) {
+        return null;
     }
 
     return { userId: session.userId };
@@ -55,5 +55,5 @@ export async function verifySession() {
 // DELETE SESSION
 export async function deleteSession() {
     (await cookies()).delete(cookie.name);
-    redirect("/sign-in");
+    revalidatePath("/");
 }

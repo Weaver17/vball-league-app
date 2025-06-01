@@ -1,4 +1,5 @@
 "use client";
+import { getPlayer } from "@/actions/actions";
 import {
     Sidebar,
     SidebarFooter,
@@ -11,10 +12,21 @@ import {
 import usePlayerContext from "@/hooks/use-player-context";
 import { SIDEBAR_OPTIONS } from "@/lib/constants";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 function AppSidebar() {
-    const { isLoggedIn, player } = usePlayerContext();
+    const { isLoggedIn, player, setPlayer, setIsLoggedIn } = usePlayerContext();
+
+    useEffect(() => {
+        const checkForCurrentPlayer = async () => {
+            const currentPlayer = await getPlayer();
+            if (currentPlayer) {
+                setPlayer(currentPlayer);
+                setIsLoggedIn(true);
+            }
+        };
+        checkForCurrentPlayer();
+    }, []);
 
     return (
         <Sidebar side="left" variant="floating">

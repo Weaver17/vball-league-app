@@ -7,9 +7,15 @@ import HeaderTitle from "./header-title";
 import Link from "next/link";
 import usePlayerContextHook from "@/hooks/use-player-context";
 import { Button } from "@/components/ui/button";
+import { deleteCurrentSession } from "@/actions/actions";
 
 function Header() {
     const { isLoggedIn, handleLogout, player } = usePlayerContextHook();
+
+    const onLogoutClick = () => {
+        handleLogout();
+        deleteCurrentSession();
+    };
 
     return (
         <header className="flex justify-between items-center pt-4 px-8 relative">
@@ -34,7 +40,7 @@ function Header() {
                         />
                         <Button
                             className="bg-muted cursor-pointer"
-                            onClick={handleLogout}
+                            onClick={onLogoutClick}
                         >
                             Sign Out
                         </Button>
