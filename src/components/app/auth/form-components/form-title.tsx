@@ -1,4 +1,4 @@
-function AuthFormTitle({ title }: { title: string }) {
+function FormTitle({ title }: { title: string }) {
     return (
         <h1 className="text-2xl font-bold font-title text-center mb-4 text-primary border-b border-border pb-4">
             {title}
@@ -6,4 +6,4 @@ function AuthFormTitle({ title }: { title: string }) {
     );
 }
 
-export default AuthFormTitle;
+export default FormTitle;

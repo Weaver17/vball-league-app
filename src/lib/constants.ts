@@ -241,57 +241,6 @@ export const ALL_PLAYERS_TABLEHEADS = [
     },
 ];
 
-export const TEMPORARY_CURRENT_LEAGUES = [
-    {
-        id: 1,
-        name: "Cap City",
-        level: "A/AA",
-        playerType: "Coed",
-        courtType: "Court",
-        endDate: "6/8/25",
-    },
-    {
-        id: 2,
-        name: "Open League 1",
-        level: "Open",
-        playerType: "Mens",
-        courtType: "Beach",
-        endDate: "6/8/25",
-    },
-    {
-        id: 3,
-        name: "B League 1",
-        level: "B",
-        playerType: "Coed",
-        courtType: "Court",
-        endDate: "6/8/25",
-    },
-    {
-        id: 4,
-        name: "BB League 1",
-        level: "BB",
-        playerType: "Coed",
-        courtType: "Court",
-        endDate: "6/8/25",
-    },
-    {
-        id: 5,
-        name: "Beer League",
-        level: "Beer",
-        playerType: "Coed",
-        courtType: "Beach",
-        endDate: "6/8/25",
-    },
-    {
-        id: 6,
-        name: "Semi-Pro",
-        level: "Semi",
-        playerType: "Womens",
-        courtType: "Court",
-        endDate: "6/8/25",
-    },
-];
-
 export const CREATE_PLAYER_HEIGHTS = Array.from(
     { length: 91 - 58 + 1 },
     (_, i) => {
@@ -321,6 +270,25 @@ export const CREATE_PLAYER_GENDERS = [
     {
         id: 4,
         label: "Prefer Not to Say",
+    },
+];
+
+export const PLAYER_TYPES = [
+    {
+        id: 1,
+        label: "Men's",
+    },
+    {
+        id: 2,
+        label: "Women's",
+    },
+    {
+        id: 3,
+        label: "Co-ed",
+    },
+    {
+        id: 4,
+        label: "Rev-co",
     },
 ];
 
@@ -361,3 +329,11 @@ export const LEVELS_OF_PLAY = [
         label: "Beer",
     },
 ];
+
+export const TEAM_SLOTS_OPTIONS = Array.from({ length: 29 }, (_, i) => {
+    const num = i + 2;
+    return {
+        id: num,
+        label: num.toString(),
+    };
+});

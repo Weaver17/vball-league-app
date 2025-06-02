@@ -6,7 +6,6 @@ import {
     FormDescription,
     FormMessage,
 } from "@/components/ui/form";
-import { CREATE_PLAYER_HEIGHTS } from "@/lib/constants";
 import {
     Select,
     SelectContent,
@@ -14,7 +13,6 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { useState } from "react";
 import { Control } from "react-hook-form";
 
 type Array = {
@@ -23,7 +21,7 @@ type Array = {
     label: string;
 };
 
-type AuthFormSelectProps = {
+type FormSelectProps = {
     title: string;
     array: Array[];
     formControl: Control<any>;
@@ -32,14 +30,14 @@ type AuthFormSelectProps = {
     message?: string;
 };
 
-function AuthFormSelect({
+function FormSelect({
     title,
     array,
     formControl,
     name,
     description,
     message,
-}: AuthFormSelectProps) {
+}: FormSelectProps) {
     return (
         <FormField
             control={formControl}
@@ -75,4 +73,4 @@ function AuthFormSelect({
     );
 }
 
-export default AuthFormSelect;
+export default FormSelect;

@@ -9,23 +9,24 @@ import {
 import { Input } from "@/components/ui/input";
 import { Control } from "react-hook-form";
 
-type AuthFormInputProps = {
+type FormInputProps = {
     formControl: Control<any>;
     name: string;
     label: string;
     type: string;
     placeholder: string;
     description: string;
+    message?: string;
 };
 
-function AuthFormInput({
+function FormInput({
     formControl,
     name,
     label,
     type,
     placeholder,
     description,
-}: AuthFormInputProps) {
+}: FormInputProps) {
     return (
         <FormField
             control={formControl}
@@ -49,4 +50,4 @@ function AuthFormInput({
     );
 }
 
-export default AuthFormInput;
+export default FormInput;
