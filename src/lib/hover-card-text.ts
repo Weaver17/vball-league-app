@@ -1,5 +1,5 @@
 export const OPEN = {
-    id: 1,
+    id: 0,
     name: "Open",
     title: "The Highest Level of Play",
     summary:
@@ -10,12 +10,13 @@ export const OPEN = {
         "- Passes regularly get to the setter so they can set all three hitters",
         "- Know what 5-1, 6-2, and 4-2 offenses are and how to use them",
         "- Play with positions: outside hitter, middle hitter, right side hitter, setter, opposite, defensive specialist, and libero",
+        "- Beach players can attack, roll, and poke the ball to any location",
     ],
 } as TLevelOfPlay;
 
-export const A_DOUBLE_A = {
+export const A = {
     id: 1,
-    name: "A/AA",
+    name: "A",
     title: "High Level of Play",
     summary:
         "Extremley high level players. Highly athletic. Indoors players use complex offenses. Beach teams have blocking calls. Passing is consistent",
@@ -24,37 +25,55 @@ export const A_DOUBLE_A = {
         "- Setters understand/run tempo sets and run different types of offenses",
         "- Passes almost always get to the setter so they can set all three hitters",
         "- Know what 5-1, 6-2, and 4-2 offenses are and how to use them",
-        "- Play with positions: outside hitter, middle hitter, right side hitter, setter, and libero",
+        "- Teams at this level utilize liberos and defensive specialists",
+        "- Beach players can attack, roll, and poke the ball with high efficiency",
     ],
 } as TLevelOfPlay;
 
-export const B_DOUBLE_B = {
-    id: 1,
-    name: "B/BB",
-    title: "Solid Level of Play",
+export const DOUBLE_A = {
+    id: 2,
+    name: "AA",
+    title: "High Level of Play",
     summary:
-        "Good players. Athletic. Indoors players know to pass to the setter. Beach teams have blocking calls. Passing is decent",
+        "Extremley high level players. Highly athletic. Indoors players use complex offenses. Beach teams have blocking calls. Passing is consistent",
+    description: [
+        "- Has the ability to hit with different hits at the same position",
+        "- Setters understand/run tempo sets and run different types of offenses",
+        "- Passes usually get to the setter so they can set all three hitters",
+        "- Know what 5-1, 6-2, and 4-2 offenses are and how to use them",
+        "- Teams at this level normally utilize liberos",
+        "- Beach players can attack, roll, and poke the ball to score",
+    ],
+} as TLevelOfPlay;
+
+export const B = {
+    id: 3,
+    name: "B",
+    title: "Fairly High Level of Play",
+    summary:
+        "Good players. Athletic. Indoors players know to pass to the setter. Beach teams may or may not block. Passing is decent",
     description: [
         "- Has the ability to do an approach and hit the ball",
         "- Setters understand setting positions and can spread the ball around",
         "- Knows how to cover the court defensively during a serve and during a hit",
         "- Has a thorough understanding of different types of sets to each hitter",
         "- Knows of all the technical rules of the game",
+        "- Beach players know the legal attack types",
     ],
 } as TLevelOfPlay;
 
-export const C_DOUBLE_C = {
+export const DOUBLE_B = {
     id: 1,
-    name: "C/CC",
-    title: "Beginner Level of Play",
+    name: "BB",
+    title: "Solid Level of Play",
     summary:
-        "Beginner players. Athletic, and can play multiple positions. Beach teams may or may not block.",
+        "Good players. Indoors players know to pass to the setter, and can play multiple positions. Beach teams may or may not block.",
     description: [
         "- Has an understanding of rules",
-        "- Games have a set position for the setter and each person on the team gets a chance to be setter",
-        "- Can control their momentum and land safely on their side of the court after going up for a hit",
-        "- Know to attempt to block when a hitter is front of them",
-        "- Players play the position into which they rotate rather than assigned positions",
+        "- Has the ability to do an approach and hit the ball",
+        "- Setters understand setting positions and can spread the ball around",
+        "- Knows how to cover the court defensively during a serve and during a hit",
+        "- Has a thorough understanding of different types of sets to each hitter",
     ],
 } as TLevelOfPlay;
 
@@ -66,9 +85,9 @@ export const BEER = {
         "Players just looking to have a good time. Usually played casually with drinks involved, hence the name. Players play to win but the main goal is fun.",
     description: [
         "- Knows the general rules of the game but may not know the more technical rules",
-        "- May or may not understand basic positions and how to rotate",
+        "- Games have a set position for the setter and usually each person on the team gets a chance to be setter",
         "- When hitting the ball over the net, mainly focuses on keeping it in bounds",
-        "- May or may not understand how to score points, keep score, and when to announce the score",
+        "- Players play the position into which they rotate rather than assigned positions",
         "- Many sets/passes/hits are technically carries. Hitters do not utilize a true approach. Many points are “given” due to execution errors, i.e. shanks, bad passes etc.",
     ],
 } as TLevelOfPlay;

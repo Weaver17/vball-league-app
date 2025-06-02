@@ -357,15 +357,6 @@ export const LEVELS_OF_PLAY = [
         label: "BB",
     },
     {
-        id: 6,
-        label: "C",
-    },
-    {
-        id: 7,
-        label: "CC",
-    },
-
-    {
         id: 8,
         label: "Beer",
     },

@@ -1,11 +1,12 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import {
-    A_DOUBLE_A,
-    B_DOUBLE_B,
+    A,
+    B,
     BEER,
-    C_DOUBLE_C,
     COED,
+    DOUBLE_A,
+    DOUBLE_B,
     MENS,
     OPEN,
     REVCO,
@@ -20,12 +21,14 @@ export const getLevelOfPlay = (level: string) => {
     switch (level) {
         case "Open":
             return OPEN;
-        case "A/AA":
-            return A_DOUBLE_A;
-        case "B/BB":
-            return B_DOUBLE_B;
-        case "C/CC":
-            return C_DOUBLE_C;
+        case "A":
+            return A;
+        case "AA":
+            return DOUBLE_A;
+        case "B":
+            return B;
+        case "BB":
+            return DOUBLE_B;
         case "Beer":
             return BEER;
         default:

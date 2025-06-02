@@ -19,7 +19,7 @@ function LevelHC({ level }: { level: string }) {
                     {playLevel?.summary}
                 </p>
                 <ul>
-                    {playLevel?.description.map((item) => (
+                    {playLevel?.description.map((item: string) => (
                         <li key={item}>{item}</li>
                     ))}
                 </ul>
