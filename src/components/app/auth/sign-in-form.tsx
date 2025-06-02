@@ -24,7 +24,7 @@ function SignInForm() {
 
     const router = useRouter();
 
-    const { setPlayer, setIsLoggedIn } = usePlayerContext();
+    const { handleLogin } = usePlayerContext();
 
     async function onSignInSubmit() {
         try {
@@ -32,8 +32,7 @@ function SignInForm() {
                 email: signInForm.getValues("email"),
                 password: signInForm.getValues("password"),
             } as PlayerSignIn).then((playerData) => {
-                setPlayer(playerData);
-                setIsLoggedIn(true);
+                handleLogin(playerData);
             });
 
             router.push("/");

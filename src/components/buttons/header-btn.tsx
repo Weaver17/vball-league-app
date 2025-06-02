@@ -9,11 +9,11 @@ function HeaderBtn({
 }: {
     bgColor: string;
     text: string;
-    href: string;
+    href?: string;
 }) {
     return (
         <Button className={`${bgColor}`} asChild>
-            <Link href={href}>{text}</Link>
+            <Link href={href ?? ""}>{text}</Link>
         </Button>
     );
 }

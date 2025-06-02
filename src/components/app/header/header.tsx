@@ -3,11 +3,11 @@ import HeaderBtn from "@/components/buttons/header-btn";
 import { ThemeBtn } from "@/components/buttons/theme-btn";
 import { Volleyball } from "lucide-react";
 import React from "react";
-import HeaderTitle from "./header-title";
 import Link from "next/link";
 import usePlayerContextHook from "@/hooks/use-player-context";
-import { Button } from "@/components/ui/button";
 import { deleteCurrentSession } from "@/actions/actions";
+
+import LogoutModal from "@/components/app/modals/logout-modal";
 
 function Header() {
     const { isLoggedIn, handleLogout, player } = usePlayerContextHook();
@@ -27,9 +27,7 @@ function Header() {
                     />
                 </Link>
             </div>
-            {/* <div className="absolute top-3 left-[35%]">
-                <HeaderTitle />
-            </div> */}
+
             <div className="flex gap-4">
                 {isLoggedIn ? (
                     <>
@@ -38,12 +36,7 @@ function Header() {
                             href={`/players/${player.id}/teams`}
                             bgColor="bg-primary"
                         />
-                        <Button
-                            className="bg-muted cursor-pointer"
-                            onClick={onLogoutClick}
-                        >
-                            Sign Out
-                        </Button>
+                        <LogoutModal onLogoutClick={onLogoutClick} />
                     </>
                 ) : (
                     <>

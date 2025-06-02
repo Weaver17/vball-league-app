@@ -1,17 +1,10 @@
 "use server";
 
-import {
-    InitialUser,
-    PlayerSignIn,
-    TPlayer,
-} from "@/components/interfaces/types";
+import { PlayerSignIn, TPlayer } from "@/components/interfaces/types";
 import prisma from "@/lib/prisma";
-import { initialUserSchema } from "@/schema/auth/initialUserSchema";
-import { redirect } from "next/navigation";
 import bcrypt from "bcryptjs";
 import { createSession, deleteSession, verifySession } from "@/lib/sessions";
 import { playerSchema } from "@/schema/auth/playerSchema";
-import { equal } from "assert";
 
 // GETS
 
@@ -198,8 +191,6 @@ export const getPlayer = async () => {
                 id: session.userId as string,
             },
         });
-
-        console.log(currentPlayer);
 
         return currentPlayer;
     } catch (e) {

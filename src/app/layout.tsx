@@ -5,10 +5,8 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import {
-    PlayerContext,
-    PlayerContextProvider,
-} from "@/contexts/player-context";
+import { PlayerContextProvider } from "@/contexts/player-context";
+import { Toaster } from "react-hot-toast";
 
 const sansFont = fontSans({
     variable: "--font-font-sans",
@@ -42,6 +40,7 @@ export default function RootLayout({
                     disableTransitionOnChange
                 >
                     <PlayerContextProvider>{children}</PlayerContextProvider>
+                    <Toaster position="top-center" />
                 </ThemeProvider>
             </body>
         </html>
