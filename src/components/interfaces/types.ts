@@ -8,3 +8,8 @@ export type InitialUser = z.infer<typeof initialUserSchema>;
 export type PlayerSignIn = z.infer<typeof playerSignInSchema>;
 
 export type TPlayer = z.infer<typeof playerSchema>;
+
+export type DateRange = {
+    from: Date | undefined;
+    to: Date | undefined;
+};

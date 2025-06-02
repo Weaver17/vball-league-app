@@ -9,6 +9,7 @@ import { deleteCurrentSession } from "@/actions/actions";
 
 import LogoutModal from "@/components/app/modals/logout-modal";
 import CreateTeamSheet from "../create/create-team";
+import CreateLeagueSheet from "../create/create-league";
 
 function Header() {
     const { isLoggedIn, handleLogout, player } = usePlayerContextHook();
@@ -33,11 +34,7 @@ function Header() {
                 {isLoggedIn ? (
                     <>
                         <CreateTeamSheet />
-                        <HeaderBtn
-                            text="Create League"
-                            href={`/players/${player.id}/teams`}
-                            bgColor="bg-primary"
-                        />
+                        <CreateLeagueSheet />
                         <LogoutModal onLogoutClick={onLogoutClick} />
                     </>
                 ) : (

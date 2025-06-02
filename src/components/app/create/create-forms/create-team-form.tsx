@@ -24,7 +24,7 @@ function CreateTeamForm() {
                     name="team-name"
                     type="text"
                     placeholder="Empire Spikes Back"
-                    description="Enter your team name"
+                    description="Enter your team's name"
                 />
 
                 <div className="grid grid-cols-2 gap-4">
