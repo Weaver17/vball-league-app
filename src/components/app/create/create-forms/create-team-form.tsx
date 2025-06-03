@@ -11,17 +11,55 @@ import FormSelect from "../../auth/form-components/form-select";
 import FormInput from "../../auth/form-components/form-input";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
+import { toastSuccess } from "@/lib/toast";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import { use } from "react";
+import usePlayerContext from "@/hooks/use-player-context";
 
-function CreateTeamForm() {
-    const createTeamForm = useForm();
+function CreateTeamForm({
+    onCreateTeamSubmit,
+}: {
+    onCreateTeamSubmit: Function;
+}) {
+    const createTeamForm = useForm({
+        defaultValues: {
+            name: "",
+            courtType: "",
+            level: "",
+            playerType: "",
+            totalRosterSpots: "",
+        },
+    });
+
+    const { player } = usePlayerContext();
+
+    const router = useRouter();
+
+    const onSubmit = () => {
+        onCreateTeamSubmit(
+            {
+                name: createTeamForm.getValues("name"),
+                courtType: createTeamForm.getValues("courtType"),
+                level: createTeamForm.getValues("level"),
+                playerType: createTeamForm.getValues("playerType"),
+                totalRosterSpots: parseInt(
+                    createTeamForm.getValues("totalRosterSpots")
+                ),
+            },
+            player
+        );
+        toast("Team Created Successfully", toastSuccess);
+        // router.push("/teams");
+    };
 
     return (
         <Form {...createTeamForm}>
-            <form action="" className="flex flex-col gap-4 h-full">
+            <form onSubmit={onSubmit} className="flex flex-col gap-4 h-full">
                 <FormInput
                     label="Team Name"
                     formControl={createTeamForm.control}
-                    name="team-name"
+                    name="name"
                     type="text"
                     placeholder="Empire Spikes Back"
                     description="Enter your team's name"
@@ -32,7 +70,7 @@ function CreateTeamForm() {
                         title="Court Type"
                         array={COURT_TYPES}
                         formControl={createTeamForm.control}
-                        name="court-type"
+                        name="courtType"
                     />
                     <FormSelect
                         title="Level"
@@ -44,13 +82,13 @@ function CreateTeamForm() {
                         title="Player Type"
                         array={PLAYER_TYPES}
                         formControl={createTeamForm.control}
-                        name="player-type"
+                        name="playerType"
                     />
                     <FormSelect
                         title="Total Roster Spots"
                         array={TEAM_SLOTS_OPTIONS}
                         formControl={createTeamForm.control}
-                        name="total-roster-spots"
+                        name="totalRosterSpots"
                     />
                 </div>
                 <p className="text-sm border-t border-secondary mt-auto mb-4 pt-4">

@@ -5,7 +5,7 @@ import { useForm, UseFormReturn } from "react-hook-form";
 import FormTitle from "./form-components/form-title";
 import FormFooter from "./form-components/form-footer";
 import React from "react";
-import { InitialUser, PlayerSignIn } from "@/components/interfaces/types";
+import { PlayerSignIn } from "@/components/interfaces/types";
 import FormInput from "./form-components/form-input";
 import { getPlayerByEmail } from "@/actions/actions";
 import { useRouter } from "next/navigation";

@@ -51,7 +51,7 @@ interface Team {
     rosterSpots: number;
     playerType: string;
     courtType: string;
-    players: Player[];
+    players?: Player[];
     teamCaptain?: Player;
     teamCaptainId?: string;
     league?: League;

@@ -9,8 +9,20 @@ import {
 } from "@/components/ui/sheet";
 
 import CreateTeamForm from "./create-forms/create-team-form";
+import { TTeam } from "@/components/interfaces/types";
+import { createTeam } from "@/actions/actions";
 
 function CreateTeamSheet() {
+    async function onCreateTeamSubmit(formData: TTeam, player: Player) {
+        try {
+            const newTeam = await createTeam(formData, player);
+            console.log(newTeam);
+        } catch (e) {
+            console.log(e);
+            throw e;
+        }
+    }
+
     return (
         <Sheet>
             <SheetTrigger asChild>
@@ -22,7 +34,7 @@ function CreateTeamSheet() {
                         Create Team
                     </SheetTitle>
                 </SheetHeader>
-                <CreateTeamForm />
+                <CreateTeamForm onCreateTeamSubmit={onCreateTeamSubmit} />
             </SheetContent>
         </Sheet>
     );

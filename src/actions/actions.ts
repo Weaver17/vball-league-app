@@ -1,10 +1,13 @@
 "use server";
 
-import { PlayerSignIn, TPlayer } from "@/components/interfaces/types";
+import { PlayerSignIn, TPlayer, TTeam } from "@/components/interfaces/types";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { createSession, deleteSession, verifySession } from "@/lib/sessions";
 import { playerSchema } from "@/schema/auth/playerSchema";
+import { create } from "domain";
+import { createTeamSchema } from "@/schema/create/createTeamSchema";
+import { redirect } from "next/navigation";
 
 // GETS
 
@@ -277,6 +280,54 @@ export const createPlayer = async (formData: TPlayer) => {
     }
 };
 
+export const createTeam = async (formData: TTeam, player: Player) => {
+    try {
+        const validationResults = createTeamSchema.safeParse({
+            name: formData.name,
+            courtType: formData.courtType,
+            level: formData.level,
+            playerType: formData.playerType,
+            totalRosterSpots: formData.totalRosterSpots,
+        });
+
+        if (!validationResults.success) {
+            return {
+                errors: validationResults.error.flatten().fieldErrors,
+            };
+        }
+
+        const { name, courtType, level, playerType, totalRosterSpots } =
+            formData;
+
+        const team = await prisma.team.create({
+            data: {
+                name: name,
+                courtType: courtType,
+                level: level,
+                playerType: playerType,
+                rosterSpots: totalRosterSpots,
+                teamCaptain: {
+                    connect: {
+                        id: player.id,
+                    },
+                },
+                players: {
+                    connect: {
+                        id: player.id,
+                    },
+                },
+            },
+        });
+
+        redirect(`/teams/${team.id}`);
+
+        return team;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
 // DELETE SESSION
 export const deleteCurrentSession = async () => {
     try {
@@ -294,68 +345,3 @@ export const deleteCurrentSession = async () => {
         throw e;
     }
 };
-
-// export const createInitialUser = async (formData: InitialUser) => {
-//     try {
-//         // Validate Fields
-//         const validationResults = initialUserSchema.safeParse({
-//             email: formData.email,
-//             firstName: formData.firstName,
-//             lastName: formData.lastName,
-//             password: formData.password,
-//         });
-
-//         if (!validationResults.success) {
-//             return {
-//                 errors: validationResults.error.flatten().fieldErrors,
-//             };
-//         }
-
-//         // Create User
-//         const { email, firstName, lastName, password } = formData;
-
-//         const existingUser = await prisma.initialUser.findUnique({
-//             where: {
-//                 email: email,
-//             },
-//         });
-
-//         if (existingUser) {
-//             throw new Error("Email already in use");
-//         }
-
-//         const hashedPassword = await bcrypt.hash(password, 10);
-
-//         const initialUser = await prisma.initialUser.create({
-//             data: {
-//                 email: email,
-//                 firstName: firstName,
-//                 lastName: lastName,
-//                 password: hashedPassword,
-//             },
-//         });
-
-//         // Create Session
-//         await createSession(initialUser.id);
-//     } catch (e) {
-//         console.log(e);
-//         throw e;
-//     }
-// };
-
-// HANDLES
-
-// async function handleSignUpClick() {
-//     try {
-//         await createInitialUser({
-//             email: signUpForm.getValues("email"),
-//             password: signUpForm.getValues("password"),
-//             firstName: signUpForm.getValues("firstName"),
-//             lastName: signUpForm.getValues("lastName"),
-//         } as InitialUser);
-//         redirect("/sign-up/create-player");
-//     } catch (e) {
-//         console.log(e);
-//         throw e;
-//     }
-// }

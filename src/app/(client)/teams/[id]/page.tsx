@@ -1,6 +1,7 @@
 import { getTeamById } from "@/actions/actions";
 import LevelHC from "@/components/hover-cards/level-hc";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components/ui/button";
 import { BEACH_POSITIONS, images, INDOOR_POSITIONS } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
@@ -60,11 +61,21 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                         </div>
                         <div className="flex flex-col gap-2 text-center">
                             <TeamLabel text="League" />
-                            <p>
-                                <Link href={`/leagues/${team?.league?.id}`}>
-                                    {team?.league?.name}
-                                </Link>
-                            </p>
+
+                            {team?.league === null ? (
+                                <Button
+                                    variant="link"
+                                    className="cursor-pointer h-5 text-base"
+                                >
+                                    Join League
+                                </Button>
+                            ) : (
+                                <p>
+                                    <Link href={`/leagues/${team?.league?.id}`}>
+                                        {team?.league?.name}
+                                    </Link>
+                                </p>
+                            )}
                         </div>
                         <div className="flex flex-col gap-2 text-center">
                             <TeamLabel text="Captain" />

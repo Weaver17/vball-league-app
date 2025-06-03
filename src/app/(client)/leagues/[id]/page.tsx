@@ -1,6 +1,7 @@
 import { getLeagueById } from "@/actions/actions";
 import LevelHC from "@/components/hover-cards/level-hc";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
+import { Button } from "@/components/ui/button";
 import { images } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
@@ -95,6 +96,12 @@ async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
                     </div>
                     <div className="flex flex-col gap-4 text-center">
                         <LeagueLabel text="Free Agents" />
+                        <Button
+                            variant="link"
+                            className="cursor-pointer h-5 text-base"
+                        >
+                            Join League
+                        </Button>
                         {league?.freeAgents && league?.freeAgents.length > 0 ? (
                             league.freeAgents.map((player) => (
                                 <p key={player.id}>
