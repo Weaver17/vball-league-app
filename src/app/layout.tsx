@@ -31,7 +31,7 @@ export default function RootLayout({
     return (
         <html lang="en" suppressHydrationWarning>
             <body
-                className={`${sansFont.variable} ${monoFont.variable} antialiased font-sans max-w-[1480px] mx-auto `}
+                className={`${sansFont.variable} ${monoFont.variable} antialiased font-sans max-w-[1480px] mx-auto`}
             >
                 <ThemeProvider
                     attribute="class"
