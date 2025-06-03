@@ -13,8 +13,6 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { toastSuccess } from "@/lib/toast";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
-import { use } from "react";
 import usePlayerContext from "@/hooks/use-player-context";
 
 function CreateTeamForm({
@@ -34,8 +32,6 @@ function CreateTeamForm({
 
     const { player } = usePlayerContext();
 
-    const router = useRouter();
-
     const onSubmit = () => {
         onCreateTeamSubmit(
             {
@@ -50,7 +46,6 @@ function CreateTeamForm({
             player
         );
         toast("Team Created Successfully", toastSuccess);
-        // router.push("/teams");
     };
 
     return (

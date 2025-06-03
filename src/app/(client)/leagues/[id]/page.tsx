@@ -1,5 +1,6 @@
 import { getLeagueById } from "@/actions/actions";
 import PageLabel from "@/components/app/page/label";
+import JoinLeagueBtn from "@/components/buttons/join-league-btn";
 import LevelHC from "@/components/hover-cards/level-hc";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
@@ -93,12 +94,7 @@ async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
                     </div>
                     <div className="flex flex-col gap-4 text-center">
                         <PageLabel text="Free Agents" />
-                        <Button
-                            variant="link"
-                            className="cursor-pointer h-5 text-base"
-                        >
-                            Join League
-                        </Button>
+                        <JoinLeagueBtn league={league as League} />
                         {league?.freeAgents && league?.freeAgents.length > 0 ? (
                             league.freeAgents.map((player) => (
                                 <p key={player.id}>

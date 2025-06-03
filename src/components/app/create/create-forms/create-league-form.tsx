@@ -1,3 +1,4 @@
+"use client";
 import { Form } from "@/components/ui/form";
 import React from "react";
 import { useForm } from "react-hook-form";
@@ -5,6 +6,7 @@ import FormInput from "../../auth/form-components/form-input";
 import FormSelect from "../../auth/form-components/form-select";
 import {
     COURT_TYPES,
+    DAYS_OF_GAMES,
     LEVELS_OF_PLAY,
     PLAYER_TYPES,
     TEAM_SLOTS_OPTIONS,
@@ -12,35 +14,68 @@ import {
 import { Button } from "@/components/ui/button";
 import { FormDatePicker } from "../../auth/form-components/form-date-picker";
 import { addDays } from "date-fns";
+import usePlayerContext from "@/hooks/use-player-context";
+import toast from "react-hot-toast";
+import { toastSuccess } from "@/lib/toast";
 
-function CreateLeagueForm() {
+function CreateLeagueForm({
+    onCreateLeagueSubmit,
+}: {
+    onCreateLeagueSubmit: Function;
+}) {
     const createLeagueForm = useForm({
         defaultValues: {
-            dateRange: {
+            name: "",
+            courtType: "",
+            level: "",
+            playerType: "",
+            totalTeamSpots: "",
+            dayOfGames: "",
+            leagueDateRange: {
                 from: new Date(),
                 to: addDays(new Date(), 7),
             },
         },
     });
 
+    const { player } = usePlayerContext();
+
+    const onSubmit = () => {
+        onCreateLeagueSubmit(
+            {
+                name: createLeagueForm.getValues("name"),
+                courtType: createLeagueForm.getValues("courtType"),
+                level: createLeagueForm.getValues("level"),
+                playerType: createLeagueForm.getValues("playerType"),
+                totalTeamSpots: parseInt(
+                    createLeagueForm.getValues("totalTeamSpots")
+                ),
+                dayOfGames: createLeagueForm.getValues("dayOfGames"),
+                leagueDateRange: createLeagueForm.getValues("leagueDateRange"),
+            },
+            player
+        );
+        toast("League Created Successfully", toastSuccess);
+    };
+
     return (
         <Form {...createLeagueForm}>
-            <form action="" className="flex flex-col gap-4 h-full">
+            <form onSubmit={onSubmit} className="flex flex-col gap-2 h-full">
                 <FormInput
                     label="League Name"
                     formControl={createLeagueForm.control}
-                    name="league-name"
+                    name="name"
                     type="text"
                     placeholder="Volleyball Nations League"
                     description="Enter your league's name"
                 />
 
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-2">
                     <FormSelect
                         title="Court Type"
                         array={COURT_TYPES}
                         formControl={createLeagueForm.control}
-                        name="court-type"
+                        name="courtType"
                     />
                     <FormSelect
                         title="Level"
@@ -52,19 +87,25 @@ function CreateLeagueForm() {
                         title="Player Type"
                         array={PLAYER_TYPES}
                         formControl={createLeagueForm.control}
-                        name="player-type"
+                        name="playerType"
                     />
                     <FormSelect
                         title="Total Team Spots"
                         array={TEAM_SLOTS_OPTIONS}
                         formControl={createLeagueForm.control}
-                        name="total-roster-spots"
+                        name="totalTeamSpots"
+                    />
+                    <FormSelect
+                        title="Day of Games"
+                        array={DAYS_OF_GAMES}
+                        formControl={createLeagueForm.control}
+                        name="dayOfGames"
                     />
                 </div>
                 <div className="w-full space-y-4">
                     <FormDatePicker
                         formControl={createLeagueForm.control}
-                        name="league-date-range"
+                        name="leagueDateRange"
                         label="League Date Range"
                     />
                 </div>

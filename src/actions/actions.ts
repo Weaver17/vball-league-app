@@ -1,6 +1,6 @@
 "use server";
 
-import { PlayerSignIn, TPlayer, TTeam } from "@/interfaces/types";
+import { PlayerSignIn, TLeague, TPlayer, TTeam } from "@/interfaces/types";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { createSession, deleteSession, verifySession } from "@/lib/sessions";
@@ -8,6 +8,7 @@ import { playerSchema } from "@/schema/auth/playerSchema";
 import { create } from "domain";
 import { createTeamSchema } from "@/schema/create/createTeamSchema";
 import { redirect } from "next/navigation";
+import { createLeagueSchema } from "@/schema/create/createLeagueSchema";
 
 // GETS
 
@@ -322,6 +323,70 @@ export const createTeam = async (formData: TTeam, player: Player) => {
         redirect(`/teams/${team.id}`);
 
         return team;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+export const createLeague = async (formData: TLeague, player: Player) => {
+    try {
+        formData.leagueDateRange = {
+            from: new Date(formData.leagueDateRange.from),
+            to: new Date(formData.leagueDateRange.to),
+        };
+
+        const validationResults = createLeagueSchema.safeParse({
+            name: formData.name,
+            courtType: formData.courtType,
+            level: formData.level,
+            playerType: formData.playerType,
+            totalTeamSpots: formData.totalTeamSpots,
+            leagueDateRange: formData.leagueDateRange,
+            dayOfGames: formData.dayOfGames,
+        });
+
+        console.log(formData);
+
+        if (!validationResults.success) {
+            return {
+                errors: validationResults.error.flatten().fieldErrors,
+            };
+        }
+
+        const {
+            name,
+            courtType,
+            level,
+            playerType,
+            totalTeamSpots,
+            leagueDateRange,
+            dayOfGames,
+        } = formData;
+
+        const league = await prisma.league.create({
+            data: {
+                name: name,
+                slug: name.toLowerCase().replace(/ /g, "-"),
+                courtType: courtType,
+                level: level,
+                playerType: playerType,
+                starts: leagueDateRange.from,
+                ends: leagueDateRange.to,
+                teamSlots: totalTeamSpots,
+                commissioner: {
+                    connect: {
+                        id: player.id,
+                    },
+                },
+                status: "Upcoming",
+                day: dayOfGames,
+            },
+        });
+
+        redirect(`/leagues/${league.id}`);
+
+        return league;
     } catch (e) {
         console.log(e);
         throw e;
