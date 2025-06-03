@@ -1,14 +1,11 @@
 import { getLeagueById } from "@/actions/actions";
+import PageLabel from "@/components/app/page/label";
 import LevelHC from "@/components/hover-cards/level-hc";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { images } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
-
-const LeagueLabel = ({ text }: { text: string }) => {
-    return <h5 className="border-b border-secondary font-medium">{text}</h5>;
-};
 
 async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -24,11 +21,11 @@ async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
                     <h3 className="text-center">{league?.name}</h3>
                     <div className="flex gap-4 justify-evenly">
                         <div className="flex flex-col gap-1 text-center">
-                            <LeagueLabel text="Level" />
+                            <PageLabel text="Level" />
                             <LevelHC level={league?.level ?? ""} />
                         </div>
                         <div className="flex flex-col gap-2 text-center">
-                            <LeagueLabel text="League Size" />
+                            <PageLabel text="League Size" />
                             <p>{league?.teamSlots} Teams</p>
                         </div>
                     </div>
@@ -42,7 +39,7 @@ async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
                         />
                     </AspectRatio>
                     <div className="flex flex-col gap-4 items-center">
-                        <LeagueLabel text="Commissioner" />
+                        <PageLabel text="Commissioner" />
                         <p>
                             {league?.commissioner?.firstName}{" "}
                             {league?.commissioner?.lastName}
@@ -54,34 +51,34 @@ async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
                 <div className="container">
                     <div className="flex flex-wrap gap-4 justify-evenly">
                         <div className="flex flex-col gap-2 text-center">
-                            <LeagueLabel text="Player Type" />
+                            <PageLabel text="Player Type" />
                             <p>{league?.playerType}</p>
                         </div>
                         <div className="flex flex-col gap-2 text-center">
-                            <LeagueLabel text="Court Type" />
+                            <PageLabel text="Court Type" />
                             <p>{league?.courtType}</p>
                         </div>
                         <div className="flex flex-col gap-2 text-center">
-                            <LeagueLabel text="Start Date" />
+                            <PageLabel text="Start Date" />
                             <p>{league?.starts.toDateString()}</p>
                         </div>
                         <div className="flex flex-col gap-2 text-center">
-                            <LeagueLabel text="End Date" />
+                            <PageLabel text="End Date" />
                             <p>{league?.ends.toDateString()}</p>
                         </div>
                         <div className="flex flex-col gap-2 text-center">
-                            <LeagueLabel text="Status" />
+                            <PageLabel text="Status" />
                             <p>{league?.status}</p>
                         </div>
                         <div className="flex flex-col gap-2 text-center">
-                            <LeagueLabel text="Day(s)" />
+                            <PageLabel text="Day(s)" />
                             <p>{league?.day}</p>
                         </div>
                     </div>
                 </div>
                 <div className="container flex-row! justify-evenly gap-4">
                     <div className="text-center flex flex-col gap-4">
-                        <LeagueLabel text="Teams" />
+                        <PageLabel text="Teams" />
                         {league?.teams && league?.teams.length > 0 ? (
                             league.teams.map((team) => (
                                 <p key={team.id}>
@@ -95,7 +92,7 @@ async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
                         )}
                     </div>
                     <div className="flex flex-col gap-4 text-center">
-                        <LeagueLabel text="Free Agents" />
+                        <PageLabel text="Free Agents" />
                         <Button
                             variant="link"
                             className="cursor-pointer h-5 text-base"

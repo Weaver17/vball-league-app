@@ -1,6 +1,6 @@
 "use server";
 
-import { PlayerSignIn, TPlayer, TTeam } from "@/components/interfaces/types";
+import { PlayerSignIn, TPlayer, TTeam } from "@/interfaces/types";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { createSession, deleteSession, verifySession } from "@/lib/sessions";

@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/sheet";
 
 import CreateTeamForm from "./create-forms/create-team-form";
-import { TTeam } from "@/components/interfaces/types";
+import { TTeam } from "@/interfaces/types";
 import { createTeam } from "@/actions/actions";
 
 function CreateTeamSheet() {

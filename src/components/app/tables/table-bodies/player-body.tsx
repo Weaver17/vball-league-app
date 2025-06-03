@@ -45,7 +45,9 @@ function PlayerTableBody({
                                 key={team.id}
                                 className="text-center flex flex-col "
                             >
-                                {team.name}
+                                <Link href={`/teams/${team.id}`}>
+                                    {team.name}
+                                </Link>
                             </TableCell>
                         ))
                     ) : (

@@ -1,14 +1,12 @@
 import { getTeamById } from "@/actions/actions";
+import PageLabel from "@/components/app/page/label";
+import TeamJoinLeague from "@/components/app/page/team-join-league";
 import LevelHC from "@/components/hover-cards/level-hc";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { BEACH_POSITIONS, images, INDOOR_POSITIONS } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
-
-const TeamLabel = ({ text }: { text: string }) => {
-    return <h5 className="border-b border-secondary font-medium">{text}</h5>;
-};
 
 async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
@@ -24,11 +22,11 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                     <h3 className="text-center">{team?.name}</h3>
                     <div className="flex gap-4 justify-evenly">
                         <div className="flex flex-col gap-1 text-center">
-                            <TeamLabel text="Level" />
+                            <PageLabel text="Level" />
                             <LevelHC level={team?.level ?? ""} />
                         </div>
                         <div className="flex flex-col gap-2 text-center">
-                            <TeamLabel text="Roster Size" />
+                            <PageLabel text="Roster Size" />
                             <p>{team?.rosterSpots}</p>
                         </div>
                     </div>
@@ -43,7 +41,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                     </AspectRatio>
                     {/* TEAM COACH  */}
                     <div className="flex flex-col gap-2 text-center">
-                        <TeamLabel text="Head Coach" />
+                        <PageLabel text="Head Coach" />
                         <p>HEAD COACH</p>
                     </div>
                 </div>
@@ -52,33 +50,21 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                 <div className="container">
                     <div className="flex flex-wrap gap-4 justify-evenly">
                         <div className="flex flex-col gap-2 text-center">
-                            <TeamLabel text="Player Type" />
+                            <PageLabel text="Player Type" />
                             <p>{team?.playerType}</p>
                         </div>
                         <div className="flex flex-col gap-2 text-center">
-                            <TeamLabel text="Court Type" />
+                            <PageLabel text="Court Type" />
                             <p>{team?.courtType}</p>
                         </div>
                         <div className="flex flex-col gap-2 text-center">
-                            <TeamLabel text="League" />
-
-                            {team?.league === null ? (
-                                <Button
-                                    variant="link"
-                                    className="cursor-pointer h-5 text-base"
-                                >
-                                    Join League
-                                </Button>
-                            ) : (
-                                <p>
-                                    <Link href={`/leagues/${team?.league?.id}`}>
-                                        {team?.league?.name}
-                                    </Link>
-                                </p>
-                            )}
+                            <TeamJoinLeague
+                                league={team?.league as League}
+                                teamCaptainId={team?.teamCaptain?.id ?? ""}
+                            />
                         </div>
                         <div className="flex flex-col gap-2 text-center">
-                            <TeamLabel text="Captain" />
+                            <PageLabel text="Captain" />
                             <p>
                                 <Link
                                     href={`/players/${team?.teamCaptain?.id}`}
@@ -95,7 +81,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                         {team?.courtType === "Beach" && (
                             <div className="flex  gap-12 justify-evenly">
                                 <div className="space-y-2">
-                                    <TeamLabel
+                                    <PageLabel
                                         text={BEACH_POSITIONS[0].label}
                                     />
                                     {team?.players.map((player) => {
@@ -117,7 +103,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     })}
                                 </div>
                                 <div className="space-y-2">
-                                    <TeamLabel
+                                    <PageLabel
                                         text={BEACH_POSITIONS[1].label}
                                     />
                                     {team?.players.map((player) => {
@@ -139,7 +125,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     })}
                                 </div>
                                 <div className="space-y-2">
-                                    <TeamLabel
+                                    <PageLabel
                                         text={BEACH_POSITIONS[2].label}
                                     />
                                     {team?.players.map((player) => {
@@ -165,7 +151,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                         {team?.courtType === "Court" && (
                             <div className="flex flex-wrap gap-4 justify-evenly">
                                 <div className="space-y-2">
-                                    <TeamLabel
+                                    <PageLabel
                                         text={INDOOR_POSITIONS[0].label}
                                     />
                                     {team?.players.map((player) => {
@@ -187,7 +173,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     })}
                                 </div>
                                 <div className="space-y-2">
-                                    <TeamLabel
+                                    <PageLabel
                                         text={INDOOR_POSITIONS[1].label}
                                     />
                                     {team?.players.map((player) => {
@@ -209,7 +195,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     })}
                                 </div>
                                 <div className="space-y-2">
-                                    <TeamLabel
+                                    <PageLabel
                                         text={INDOOR_POSITIONS[2].label}
                                     />
 
@@ -232,7 +218,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     })}
                                 </div>
                                 <div className="space-y-2">
-                                    <TeamLabel
+                                    <PageLabel
                                         text={INDOOR_POSITIONS[3].label}
                                     />
 
@@ -255,7 +241,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     })}
                                 </div>
                                 <div className="space-y-2">
-                                    <TeamLabel
+                                    <PageLabel
                                         text={INDOOR_POSITIONS[4].label}
                                     />
 
@@ -278,7 +264,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     })}
                                 </div>
                                 <div className="space-y-2">
-                                    <TeamLabel
+                                    <PageLabel
                                         text={INDOOR_POSITIONS[5].label}
                                     />
 
@@ -301,7 +287,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                                     })}
                                 </div>
                                 <div className="space-y-2">
-                                    <TeamLabel
+                                    <PageLabel
                                         text={INDOOR_POSITIONS[6].label}
                                     />
 
