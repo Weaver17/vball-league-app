@@ -1,24 +1,26 @@
 "use client";
 import React from "react";
-import PageLabel from "./label";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import usePlayerContextHook from "@/hooks/use-player-context";
 
 type Props = {
     league: League | null;
-    teamCaptainId: string;
+    teamCaptain: Player | null;
+    children: React.ReactNode;
 };
 
-function TeamJoinLeague({ league, teamCaptainId }: Props) {
+function TeamJoinLeague({ league, teamCaptain, children }: Props) {
     const { player } = usePlayerContextHook();
+
+    console.log(league?.name, player?.id, teamCaptain?.id);
 
     return (
         <>
-            <PageLabel text="League" />
+            {children}
 
-            {league === null ? (
-                player.id === teamCaptainId ? (
+            {league == null ? (
+                player && player.id === teamCaptain?.id ? (
                     <Button
                         variant="link"
                         className="cursor-pointer h-5 text-base"
@@ -28,7 +30,7 @@ function TeamJoinLeague({ league, teamCaptainId }: Props) {
                 ) : null
             ) : (
                 <p>
-                    <Link href={`/leagues/${league?.id}`}>{league?.name}</Link>
+                    <Link href={`/leagues/${league.id}`}>{league.name}</Link>
                 </p>
             )}
         </>
