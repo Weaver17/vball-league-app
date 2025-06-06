@@ -399,6 +399,69 @@ export const createLeague = async (formData: TLeague, player: Player) => {
     }
 };
 
+// UPDATES
+// Submit action for team to join a league
+export const teamJoinLeague = async (teamId: string, leagueId: string) => {
+    try {
+        const team = await prisma.team.findUnique({
+            where: { id: teamId },
+            include: { players: true },
+        });
+
+        if (!team) {
+            throw new Error("Team not found");
+        }
+
+        const league = await prisma.league.findUnique({
+            where: { id: leagueId },
+            include: { teams: true },
+        });
+
+        if (!league) {
+            throw new Error("League not found");
+        }
+
+        // Check if the team is already in the league
+        const isTeamInLeague = await prisma.league.findFirst({
+            where: {
+                id: leagueId,
+                teams: {
+                    some: {
+                        id: teamId,
+                    },
+                },
+            },
+        });
+
+        if (isTeamInLeague) {
+            throw new Error("Team is already in the league");
+        }
+
+        // Check if the league is full
+        if (league.teams.length >= league.teamSlots) {
+            throw new Error("League is full");
+        }
+
+        // Add the team to the league
+        const updatedLeague = await prisma.league.update({
+            where: { id: leagueId },
+            data: {
+                teams: {
+                    connect: {
+                        id: teamId,
+                    },
+                },
+            },
+            include: { teams: true },
+        });
+
+        return updatedLeague;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
 // DELETE SESSION
 export const deleteCurrentSession = async () => {
     try {
