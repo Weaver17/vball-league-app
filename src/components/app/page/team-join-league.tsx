@@ -5,15 +5,14 @@ import { Button } from "@/components/ui/button";
 import usePlayerContextHook from "@/hooks/use-player-context";
 
 type Props = {
+    team: Team;
     league: League | null;
     teamCaptain: Player | null;
     children: React.ReactNode;
 };
 
-function TeamJoinLeague({ league, teamCaptain, children }: Props) {
+function TeamJoinLeague({ team, league, teamCaptain, children }: Props) {
     const { player } = usePlayerContextHook();
-
-    console.log(league?.name, player?.id, teamCaptain?.id);
 
     return (
         <>
@@ -25,7 +24,9 @@ function TeamJoinLeague({ league, teamCaptain, children }: Props) {
                         variant="link"
                         className="cursor-pointer h-5 text-base"
                     >
-                        Join League
+                        <Link href={`/teams/${team.id}/join-league`}>
+                            Join League
+                        </Link>
                     </Button>
                 ) : null
             ) : (

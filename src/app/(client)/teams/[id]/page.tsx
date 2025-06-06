@@ -61,6 +61,7 @@ async function TeamIdPage({ params }: { params: Promise<{ id: string }> }) {
                             </div>
                             <div className="flex flex-col gap-2 text-center">
                                 <TeamJoinLeague
+                                    team={team as Team}
                                     league={team?.league as League}
                                     teamCaptain={team?.teamCaptain as Player}
                                 >

@@ -68,7 +68,6 @@ model League {
   level      String
   playerType String
   courtType  String
-  status     String
   starts     DateTime
   ends       DateTime
   day        String

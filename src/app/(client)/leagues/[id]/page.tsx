@@ -5,6 +5,8 @@ import LevelHC from "@/components/hover-cards/level-hc";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import { images } from "@/lib/constants";
+import { getLeagueStatus } from "@/lib/utils";
+import { get } from "http";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -12,6 +14,8 @@ async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = await params;
 
     const league = await getLeagueById(id);
+
+    const status = getLeagueStatus(league as League);
 
     // PLAYER.PROFILEIMAGE ? IMAGE : DEFAULT
 
@@ -69,7 +73,7 @@ async function LeagueIdPage({ params }: { params: Promise<{ id: string }> }) {
                         </div>
                         <div className="flex flex-col gap-2 text-center">
                             <PageLabel text="Status" />
-                            <p>{league?.status}</p>
+                            <p>{status}</p>
                         </div>
                         <div className="flex flex-col gap-2 text-center">
                             <PageLabel text="Day(s)" />

@@ -50,3 +50,13 @@ export const getPlayerType = (type: string) => {
             return null;
     }
 };
+
+export const getLeagueStatus = (league: League | null) => {
+    if (league && Date.now() < league?.starts.getTime()) {
+        return "Upcoming";
+    } else if (league && Date.now() > league?.ends.getTime()) {
+        return "Finished";
+    } else {
+        return "Active";
+    }
+};

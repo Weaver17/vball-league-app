@@ -55,7 +55,7 @@ function AppSidebar() {
             <SidebarFooter className="mt-auto mb-4 w-full border-t border-secondary cursor-pointer hover:bg-sidebar-border/50">
                 {isLoggedIn ? (
                     <p className="mx-auto text-center py-2">
-                        <Link href={`players/${player.id}`}>
+                        <Link href={`/players/${player.id}`}>
                             {player.firstName} {player.lastName}
                         </Link>
                     </p>

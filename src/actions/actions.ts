@@ -5,7 +5,6 @@ import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { createSession, deleteSession, verifySession } from "@/lib/sessions";
 import { playerSchema } from "@/schema/auth/playerSchema";
-import { create } from "domain";
 import { createTeamSchema } from "@/schema/create/createTeamSchema";
 import { redirect } from "next/navigation";
 import { createLeagueSchema } from "@/schema/create/createLeagueSchema";
@@ -105,9 +104,17 @@ export const getTeamRoster = async (teamId: string) => {
 
 export const getCurrentLeagues = async () => {
     try {
+        // Get the current date
+        const currentDate = new Date();
+
         const activeLeagues = await prisma.league.findMany({
             where: {
-                status: "Active",
+                starts: {
+                    lte: currentDate, // League start date is less than or equal to current date
+                },
+                ends: {
+                    gte: currentDate, // League end date is greater than or equal to current date
+                },
             },
         });
 
@@ -379,7 +386,6 @@ export const createLeague = async (formData: TLeague, player: Player) => {
                         id: player.id,
                     },
                 },
-                status: "Upcoming",
                 day: dayOfGames,
             },
         });
