@@ -462,6 +462,59 @@ export const teamJoinLeague = async (teamId: string, leagueId: string) => {
     }
 };
 
+// Submit action for player to join a league as a free agent
+export const playerJoinLeagueAsFreeAgent = async (
+    playerId: string,
+    leagueId: string
+) => {
+    try {
+        const player = await prisma.player.findUnique({
+            where: { id: playerId },
+            include: { freeAgentIn: true },
+        });
+
+        if (!player) {
+            throw new Error("Player not found");
+        }
+
+        const league = await prisma.league.findUnique({
+            where: { id: leagueId },
+            include: { freeAgents: true },
+        });
+
+        if (!league) {
+            throw new Error("League not found");
+        }
+
+        // Check if the player is already in the league as a free agent
+        const isPlayerInLeague = league.freeAgents.some(
+            (freeAgent) => freeAgent.id === playerId
+        );
+
+        if (isPlayerInLeague) {
+            throw new Error("Player is already in the league as a free agent");
+        }
+
+        // Add the player to the league as a free agent
+        const updatedLeague = await prisma.league.update({
+            where: { id: leagueId },
+            data: {
+                freeAgents: {
+                    connect: {
+                        id: playerId,
+                    },
+                },
+            },
+            include: { freeAgents: true },
+        });
+
+        return updatedLeague;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
 // DELETE SESSION
 export const deleteCurrentSession = async () => {
     try {

@@ -1,6 +1,7 @@
 "use client";
 import usePlayerContextHook from "@/hooks/use-player-context";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 function JoinLeagueBtn({ league }: { league: League }) {
     const { player } = usePlayerContextHook() as { player: Player };
@@ -31,7 +32,9 @@ function JoinLeagueBtn({ league }: { league: League }) {
         <>
             {isPlayerEligible() ? (
                 <Button variant="link" className="cursor-pointer h-5 text-base">
-                    Join League
+                    <Link href={`/leagues/${league.id}/join-as-free-agent`}>
+                        Join League
+                    </Link>
                 </Button>
             ) : null}
         </>
