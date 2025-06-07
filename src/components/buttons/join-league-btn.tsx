@@ -13,8 +13,7 @@ function JoinLeagueBtn({ league }: { league: League }) {
         if (player.level !== league.level) return false;
 
         // Check if the player is already in the league
-        if (league.freeAgents?.find((player) => player.id === player.id))
-            return false;
+        if (league.freeAgents?.find((p) => p.id === player.id)) return false;
 
         // Check if the player gender matches the league's player type
         if (league.playerType === "Men's" && player.gender !== "Male")

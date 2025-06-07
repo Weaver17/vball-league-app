@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
-import CutPlayerModal from "../app/modals/cut-player-modal";
+import CutPlayerModal from "../../app/modals/cut-player-modal";
 import { Plus } from "lucide-react";
 
 type TeamAccordionItemProps = {

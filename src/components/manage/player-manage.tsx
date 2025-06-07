@@ -1,16 +1,16 @@
-"use client";
-import { Accordion } from "@/components/ui/accordion";
-import TeamAccordionItem from "./accordion-items/team-accordion-item";
+import React from "react";
+import { Accordion } from "../ui/accordion";
+import PlayerAccordionItem from "./accordion-items/player-accordion-item";
 
-function CaptainManage({ player }: { player: Player }) {
+function PlayerManage({ player }: { player: Player }) {
     return (
         <Accordion
             type="single"
             collapsible
             className="border-b border-foreground"
         >
-            {player?.captainOf.map((team: Team) => (
-                <TeamAccordionItem
+            {player?.teams.map((team: Team) => (
+                <PlayerAccordionItem
                     key={team.id}
                     teamId={team.id}
                     teamName={team.name}
@@ -21,4 +21,4 @@ function CaptainManage({ player }: { player: Player }) {
     );
 }
 
-export default CaptainManage;
+export default PlayerManage;

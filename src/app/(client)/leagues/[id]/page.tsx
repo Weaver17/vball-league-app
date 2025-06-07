@@ -3,10 +3,8 @@ import PageLabel from "@/components/app/page/label";
 import JoinLeagueBtn from "@/components/buttons/join-league-btn";
 import LevelHC from "@/components/hover-cards/level-hc";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Button } from "@/components/ui/button";
 import { images } from "@/lib/constants";
 import { getLeagueStatus } from "@/lib/utils";
-import { get } from "http";
 import Image from "next/image";
 import Link from "next/link";
 

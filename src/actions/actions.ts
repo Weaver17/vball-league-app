@@ -2,7 +2,7 @@
 
 import { PlayerSignIn, TLeague, TPlayer, TTeam } from "@/interfaces/types";
 import prisma from "@/lib/prisma";
-import bcrypt from "bcryptjs";
+// import bcrypt from "bcryptjs";
 import { createSession, deleteSession, verifySession } from "@/lib/sessions";
 import { playerSchema } from "@/schema/auth/playerSchema";
 import { createTeamSchema } from "@/schema/create/createTeamSchema";
@@ -563,6 +563,57 @@ export const deletePlayerFromTeam = async (
         });
 
         return updatedTeam;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+// Delete team from league
+export const deleteTeamFromLeague = async (
+    teamId: string,
+    leagueId: string
+) => {
+    try {
+        const team = await prisma.team.findUnique({
+            where: { id: teamId },
+            include: { players: true },
+        });
+
+        if (!team) {
+            throw new Error("Team not found");
+        }
+
+        const league = await prisma.league.findUnique({
+            where: { id: leagueId },
+            include: { teams: true },
+        });
+
+        if (!league) {
+            throw new Error("League not found");
+        }
+
+        // make sure the team is in the league
+        const isTeamInLeague = league.teams.some((team) => team.id === teamId);
+
+        if (!isTeamInLeague) {
+            throw new Error("Team is not in the league");
+        }
+
+        // Remove the team from the league
+        const updatedLeague = await prisma.league.update({
+            where: { id: leagueId },
+            data: {
+                teams: {
+                    disconnect: {
+                        id: teamId,
+                    },
+                },
+            },
+            include: { teams: true },
+        });
+
+        return updatedLeague;
     } catch (e) {
         console.log(e);
         throw e;
