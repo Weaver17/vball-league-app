@@ -1,6 +1,6 @@
 "use client";
 
-import { deletePlayerFromTeam, getTeamById } from "@/actions/actions";
+import { getTeamById } from "@/actions/actions";
 import {
     AccordionContent,
     AccordionItem,
@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
 import CutPlayerModal from "../app/modals/cut-player-modal";
+import { Plus } from "lucide-react";
 
 type TeamAccordionItemProps = {
     teamId: string;
@@ -92,6 +93,10 @@ function TeamAccordionItem({
                         No other players on this team.
                     </p>
                 )}
+                <Button variant="ghost" className="w-1/4 mr-auto">
+                    <Plus />
+                    Add Players
+                </Button>
             </AccordionContent>
         </AccordionItem>
     );
