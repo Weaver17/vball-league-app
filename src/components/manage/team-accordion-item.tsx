@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import React, { useEffect, useState } from "react";
+import CutPlayerModal from "../app/modals/cut-player-modal";
 
 type TeamAccordionItemProps = {
     teamId: string;
@@ -19,8 +20,7 @@ function TeamAccordionItem({
     teamId,
     teamName,
     currentPlayerId,
-}: // onPlayerCut,
-TeamAccordionItemProps) {
+}: TeamAccordionItemProps) {
     const [playerTeam, setPlayerTeam] = useState<Team | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -42,18 +42,6 @@ TeamAccordionItemProps) {
     useEffect(() => {
         fetchTeamData(teamId);
     }, [teamId]);
-
-    const handleCutPlayer = async (playerIdToCut: string) => {
-        if (!playerTeam) return;
-        try {
-            await deletePlayerFromTeam(playerIdToCut, playerTeam.id);
-            // Re-fetch this team's data to show updated player list
-            await fetchTeamData(playerTeam.id);
-        } catch (err) {
-            console.error("Failed to cut player:", err);
-            // Handle error (e.g., show a toast)
-        }
-    };
 
     if (isLoading) {
         return (
@@ -92,14 +80,11 @@ TeamAccordionItemProps) {
                                 <p>
                                     {p.firstName} {p.lastName}
                                 </p>
-                                <Button
-                                    size="sm"
-                                    variant="link"
-                                    className="text-destructive cursor-pointer"
-                                    onClick={() => handleCutPlayer(p.id)}
-                                >
-                                    Cut
-                                </Button>
+                                <CutPlayerModal
+                                    fetchTeamData={fetchTeamData}
+                                    playerTeam={playerTeam}
+                                    player={p}
+                                />
                             </div>
                         ))
                 ) : (

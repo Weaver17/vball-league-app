@@ -8,7 +8,6 @@ import { playerSchema } from "@/schema/auth/playerSchema";
 import { createTeamSchema } from "@/schema/create/createTeamSchema";
 import { redirect } from "next/navigation";
 import { createLeagueSchema } from "@/schema/create/createLeagueSchema";
-import { revalidatePath } from "next/cache";
 
 // GETS
 
