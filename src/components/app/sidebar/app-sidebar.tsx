@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/sidebar";
 import usePlayerContext from "@/hooks/use-player-context";
 import { SIDEBAR_OPTIONS } from "@/lib/constants";
+import { Users } from "lucide-react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
@@ -26,7 +27,7 @@ function AppSidebar() {
             }
         };
         checkForCurrentPlayer();
-    }, []);
+    }, [setPlayer, setIsLoggedIn]);
 
     return (
         <Sidebar side="left" variant="floating">
@@ -50,6 +51,19 @@ function AppSidebar() {
                             </SidebarMenuButton>
                         </SidebarMenuItem>
                     ))}
+                    {isLoggedIn ? (
+                        <SidebarMenuItem className="p-2" key="5">
+                            <SidebarMenuButton
+                                className="hover:bg-secondary/50"
+                                asChild
+                            >
+                                <Link href={`/manage/${player.id}`}>
+                                    <Users />
+                                    <h5>Manage</h5>
+                                </Link>
+                            </SidebarMenuButton>
+                        </SidebarMenuItem>
+                    ) : null}
                 </SidebarMenu>
             </SidebarGroupContent>
             <SidebarFooter className="mt-auto mb-4 w-full border-t border-secondary cursor-pointer hover:bg-sidebar-border/50">

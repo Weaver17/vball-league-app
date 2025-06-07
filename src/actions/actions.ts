@@ -8,6 +8,7 @@ import { playerSchema } from "@/schema/auth/playerSchema";
 import { createTeamSchema } from "@/schema/create/createTeamSchema";
 import { redirect } from "next/navigation";
 import { createLeagueSchema } from "@/schema/create/createLeagueSchema";
+import { revalidatePath } from "next/cache";
 
 // GETS
 
@@ -509,6 +510,60 @@ export const playerJoinLeagueAsFreeAgent = async (
         });
 
         return updatedLeague;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
+// DELETE
+// delete player from team
+export const deletePlayerFromTeam = async (
+    playerId: string,
+    teamId: string
+) => {
+    try {
+        const player = await prisma.player.findUnique({
+            where: { id: playerId },
+            include: { teams: true },
+        });
+
+        if (!player) {
+            throw new Error("Player not found");
+        }
+
+        const league = await prisma.team.findUnique({
+            where: { id: teamId },
+            include: { players: true },
+        });
+
+        if (!league) {
+            throw new Error("League not found");
+        }
+
+        // make sure the player is on the team
+        const isPlayerOnTeam = league.players.some(
+            (player) => player.id === playerId
+        );
+
+        if (!isPlayerOnTeam) {
+            throw new Error("Player is not on the team");
+        }
+
+        // Remove the player from the team
+        const updatedTeam = await prisma.team.update({
+            where: { id: teamId },
+            data: {
+                players: {
+                    disconnect: {
+                        id: playerId,
+                    },
+                },
+            },
+            include: { players: true },
+        });
+
+        return updatedTeam;
     } catch (e) {
         console.log(e);
         throw e;

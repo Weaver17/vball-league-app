@@ -1,7 +1,7 @@
 import Background from "@/components/app/background";
 import Header from "@/components/app/header/header";
 import AppSidebar from "@/components/app/sidebar/app-sidebar";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarProvider } from "@/components/ui/sidebar";
 import React from "react";
 
 function ClientLayout({

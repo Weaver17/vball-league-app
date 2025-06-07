@@ -1,4 +1,11 @@
-import { Group, Home, User, Volleyball } from "lucide-react";
+import {
+    CalendarRange,
+    Group,
+    Home,
+    User,
+    Users,
+    Volleyball,
+} from "lucide-react";
 import defaultProfilePic from "../../public/default-profile-pic.png";
 import defaultLeaguePic from "../../public/default-league-logo.svg";
 import defaultTeamPic from "../../public/default-team-logo.svg";
